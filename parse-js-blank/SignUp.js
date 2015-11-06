@@ -7,6 +7,10 @@ $("#noCar").change(function(event){
   $('#yesCarExpand').slideToggle('slow');
 });
 
+$(document).ready(function() {
+  $("#passwordHint").hide();
+});
+
 $("#signUpBtn").click(function(event) {
   var firstName = document.getElementById("firstName").value;
   var lastName  = document.getElementById("lastName").value;
@@ -27,7 +31,7 @@ $("#signUpBtn").click(function(event) {
     return;
   }
     if (password.length < 6 || confirm.length < 6) {
-    alert("Password not long enough!");
+    $("#passwordHint").slideToggle("slow");
     return;
   }
 
