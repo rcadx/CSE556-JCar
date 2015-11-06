@@ -9,7 +9,7 @@
 <body>
 	<div id="main">
 		<div id="paymentDiv">
-			<h1>Debit/Credit Card
+			<h1>Debit/Credit Card</h1>
 			<div id="paymentForm">
 				Card Number:<br><input type="text" id="cardNumber"><br>
 				Security Code/CVV:<br><input type="text" id="securityCode"><br>
@@ -22,17 +22,17 @@
 	</div>
 	<script type="text/javascript">
 		$("#submitBtn").click(function(event) {
-			var firstName = $("#firstName").value;
-  			var lastName  = $("#lastName").value;
-  			var code  = $("#securityCode").value;
-  			var number     = $("#cardNumber").value;
+			var firstName = $("#firstName").val();
+  			var lastName  = $("#lastName").val();
+  			var code  = $("#securityCode").val();
+  			var number     = $("#cardNumber").val();
   			if (!firstName && !lastName && !code && !number) {
   				alert("Fill out all fields!");
   				return;
   			}
   			window.location.replace("TandC.html");
 
-		})
+		});
 	</script>
 
 </body>
