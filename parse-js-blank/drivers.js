@@ -7,3 +7,7 @@ $("#createRideBtn").on("click", function() {
 $("#myRidesBtn").on("click", function() {
 	window.location.replace("driversMyRides.html");
 });
+
+$("#profileBtn").on("click", function() {
+	window.location.replace("profile.html");
+});
