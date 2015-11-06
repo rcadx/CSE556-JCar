@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<head>
+	<title>JCar</title>
+	  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	  <script src="//www.parsecdn.com/js/parse-1.6.7.min.js"></script>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body>
+	<div id="main">
+		
+		<h1> Terms and Conditions</h1>
+		<h2>Cancellation Policy</h2>
+		<h3>For Riders:</h3>
+		<input class="check" type="checkbox" id = "check1" value="">
+		Riders must cancel 24 hours in advance or prior for full refund.
+		<br />
+		<h3>For Drivers:</h3>
+		<input class="check" type="checkbox" id = "check2" value="">
+		Drivers must refun all money to riders if they cancel a ride or face additional charges.
+		<h2>Ten Minute Late Policy</h3>
+		<input class="check" type="checkbox" id = "check3" value="">Drivers are expected to be no more than 10 minutes late, otherwise charges will incur and be dispensed to riders.
+		<br />
+		<input class="check" type="checkbox" id = "check4" value="">Riders are expected to be no more than ten minutes late, otherwise drivers will leave and there will be no refund.
+		<br />
+		<p />
+		<input class="check" type="checkbox" id = "checkAccept" value=""><b>I have read and accepted the T&C.</b>
+		<br />
+		<button id = "acceptTC">Proceed</button>
+
+
+	</div>
+	<script type ="text/javascript" src="SignUp.js"></script>
+	<script type="text/javascript">
+	document.addEventListener("DOMContentLoaded", function(event) {
+    var acceptBtn = document.getElementById("acceptTC");
+			acceptBtn.style.display = "none";
+  });
+	
+$(".check").on("click", function(event){
+	console.log("made it 40");
+	allChecked(event);
+});
+
+function allChecked(event){
+
+	var check1 = $("#check1").attr("checked");
+	var check2 = $("#check2").attr("checked");
+	var check3 = $("#check3").attr("checked");
+	var check4 = $("#check4").attr("checked");
+	var checkAccept = $("#checkAccept").attr("checked");
+	console.log("allchecked?");
+	if (document.getElementById("check1").checked && document.getElementById("check2").checked
+		&& document.getElementById("check3").checked
+		&& document.getElementById("check4").checked
+		&& document.getElementById("checkAccept").checked
+		){
+			var acceptBtn = document.getElementById("acceptTC");
+			acceptBtn.style.display = "block";
+		$("#acceptTC").click(function(){
+			alert("You have signed up successfully.");
+			window.location.replace("login.html");
+	});
+	//if (document.getElementById("check1").checked && document.getElementById("check2").checked && document.getElementById("check3").checked && document.getElementById("check4").checked && document.getElementById("checkAceept").checked){
+	// 	console.log("works!");
+	// 	$("#acceptTC").show();
+	// 	$("#acceptTC").click(function(){
+	// 		alert("You have signed up successfully.");
+	// 		window.location.replace("login.html");
+	// 	});
+	// }
+	if (check1 && check2 && check3 && check4 && checkAccept){
+		console.log("finally");
+		$("#acceptTC").show();
+		$("#acceptTC").click(function(){
+			alert("You have signed up successfully.");
+			window.location.replace("login.html");
+		});
+	}
+}
+}
+
+	</script>
+
+</body>
+</html>
