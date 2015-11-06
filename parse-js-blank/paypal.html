@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+	<title>JCar</title>
+	  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	  <script src="//www.parsecdn.com/js/parse-1.6.7.min.js"></script>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body>
+	<div id="main">
+		<div id="paymentDiv">
+			<div id="paymentForm">
+				First Name<br><input type="text" id="firstName"><br>
+				Last Name<br><input type="text" id="lastName"><br>
+				Username<br><input type="text" id="username"><br>
+				WUSTL Email<br><input type="text" id="email"><br>
+				Phone Number<br><input type="text" id="phone"><br>
+				Password<br><input type="password" id="password"><br>
+				Confirm Password<br>
+				*Passwords must be at least 6 characters and must have at least 1 letter, 1 number, and 1 non-alphanumeric character ( "!@#\()–[{}]:;',?/*"")*<br>
+				<input type="password" id="confirmPassword"><br>
+				Do you have a car?<br>
+					<input type="radio" id="yesCar" name="car" value="yes" checked>Yes</input>
+					<input type="radio" id="noCar" name="car" value="no">No</input><br>
+				<div id="yesCarExpand">
+					Car color<br><input type="text" id="carColor"><br>
+					Car model<br><input type="text" id="carModel"><br>
+					Number of seats available<br><input type="number" id="numSeats"><br>
+				</div>
+				Payment Method<br>
+					<input type="radio" id="Card" name="payment" value="Card" checked>Debit/Credit Card</input>
+					<input type="radio" id="Paypal" name="payment" value="Paypal">Paypal</input>
+					<input type="radio" id="Cash" name="payment" value="Cash">Cash</input><br>
+				<button id="signUpBtn">Sign Up</button>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		window.location.replace("TandC.html");
+	</script>
+
+</body>
+</html>

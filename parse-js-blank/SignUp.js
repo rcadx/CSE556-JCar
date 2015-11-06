@@ -60,7 +60,14 @@ $("#signUpBtn").click(function(event) {
   user.set("existingRides", []);
   user.signUp(null, {
   success: function(user) {
-    window.location.replace("payment.html");
+    if (payment == "Card") {
+       window.location.replace("card.html");
+    } else if (payment == "Paypal") {
+       window.location.replace("paypal.html");
+    } else {
+       window.location.replace("cash.html");
+    }
+   
   },
   error: function(user, error) {
     // Show the error message somewhere and let the user try again.
