@@ -1,8 +1,9 @@
 Parse.initialize("eamcKJmUTepWXqQzYx5iNmgVUcX55xvCQX749IfY", "Gg3ZOGnMTkHaMIOZ0OJHsig6QwU5j8Jev2RkIZML");
+
 $("#yesCar").change(function(event){
   $('#yesCarExpand').slideToggle('slow');
-
 });
+
 $("#noCar").change(function(event){
   $('#yesCarExpand').slideToggle('slow');
 });
@@ -24,7 +25,7 @@ $("#signUpBtn").click(function(event) {
   var existingRides = [];
   var carModel = document.getElementById("carModel").value;
   var carColor = document.getElementById("carColor").value;
-  var numSeats = parseInt($("#numSeats"));
+  var numSeats = parseInt(document.getElementById("numSeats").value);
 
   if (!firstName || !lastName || !email || !password) {
     alert("Fill out all fields!");
@@ -59,7 +60,7 @@ $("#signUpBtn").click(function(event) {
   user.set("payment", payment);
   
   user.set("carColor", carColor);
-  user.set("carType", carModel);
+  user.set("carModel", carModel);
   user.set("numSeats", numSeats);
   user.set("existingRides", []);
   user.signUp(null, {
