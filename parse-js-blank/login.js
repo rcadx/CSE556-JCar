@@ -14,7 +14,15 @@ $("#loginBtn").on("click", function(event) {
   Parse.User.logIn(username, password, {
   success: function(user) {
     // Do stuff after successful login.
-    window.location.replace("home.html")
+    var user = Parse.User.current();
+    var isDriver = user.get("driver");
+    if (isDriver) {
+      console.log("log in successful");
+          window.location.replace("drivers.html");
+    } else {
+      window.location.replace("riders.html");
+    }
+
   },
   error: function(user, error) {
     // The login failed. Check error to see why.

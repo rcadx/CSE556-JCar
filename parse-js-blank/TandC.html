@@ -59,8 +59,8 @@ function allChecked(event){
 			var acceptBtn = document.getElementById("acceptTC");
 			acceptBtn.style.display = "block";
 		$("#acceptTC").click(function(){
-			alert("You have signed up successfully.");
-			window.location.replace("home.html");
+			alert("You have signed up successfully. Log in on the next screen to proceed to the application.");
+			window.location.replace("login.html");
 	});
 	//if (document.getElementById("check1").checked && document.getElementById("check2").checked && document.getElementById("check3").checked && document.getElementById("check4").checked && document.getElementById("checkAceept").checked){
 	// 	console.log("works!");
@@ -75,7 +75,7 @@ function allChecked(event){
 		$("#acceptTC").show();
 		$("#acceptTC").click(function(){
 			alert("You have signed up successfully.");
-			window.location.replace("home.html");
+			window.location.replace("drivers.html");
 		});
 	}
 }
