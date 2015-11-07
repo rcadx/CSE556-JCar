@@ -9,12 +9,12 @@
 <body>
 	<div id="main">
 		<div id="loginFormDiv">
-			<h1>Create a Ride</h1>
+			<h1>Request a Ride</h1>
 			Destination: <input type="text" id="destination"><br>
-			Date: <input type="date" id="date"><br>
-			Pickup Time: <input type="time" id="time"><br>
-			Estimated Duration: <input type="number" id="duration"> hours<br>
-			Pickup Location: 
+			Date: <input type="date" id="date"> <!-- Flexible? +/- <input type="number" id="flexibleDays"> days<br> -->
+			Time Range Available - Start Time: <input type="time" id="startTime"> End Time: <input type="time" id="endTime"><br>
+			<!-- Desired Duration*: <input type="number" id="duration"> hours<br> -->
+			Preferred Pickup Location: 
 			<select id="pickupLoc">
   				<option value="Clocktower">Clocktower</option>
   				<option value="Village/Snow Way">Village/Snow Way</option>
@@ -22,10 +22,10 @@
   				<option value="Lofts">Lofts</option>
   				<option value="DUC/Mallinkrodt Parking Lot">DUC/Mallinkrodt Parking lot</option>
 			</select><br>
-			Price: $<input type="number" id="price"><br>
+			Max Price Willing to Pay: $<input type="number" id="price"><br>
 			Additional Comments: <input type="text" id="comments"><br>
 			<div id="buttons">
-			<button id="createRideBtn">Create Ride</button>
+			<button id="requestRideBtn">Submit Ride Request</button>
 			<button id="cancelBtn">Cancel</button>
 		</div>
 		</div>
@@ -34,49 +34,56 @@
 		Parse.initialize("eamcKJmUTepWXqQzYx5iNmgVUcX55xvCQX749IfY", "Gg3ZOGnMTkHaMIOZ0OJHsig6QwU5j8Jev2RkIZML");
 
 		$("#cancelBtn").on("click", function() {
-			window.location.replace("drivers.html");
+			window.location.replace("riders.html");
 		});
 
-		$("#createRideBtn").on("click", function() {
+		$("#requestRideBtn").on("click", function() {
 				var pickupLoc = $("#pickupLoc").val();
 			  	var destination = $("#destination").val();
-				var date = $("#date").val();
-				var time = $("#time").val().toLocaleString();
-				var dateTime = new Date(date + " " + time);
+				var d = $("#date").val();
+				// var flexibleDays = $("#flexibleDays").val();
+				// var time = $("#time").val().toLocaleString();
+				var start = $("#startTime").val().toLocaleString();
+				var end = $("#endTime").val().toLocaleString();
+				// var dateTime = new Date(date + " " + time);
+				var date = new Date(d);
+				var startTime = new Date(d + " " + start);
+				var endTime = new Date(d + " " + end);
 				var price = Number($("#price").val());
-				var numSeats = Parse.User.current().get("numSeats");
 				var comments = $("#comments").val();
-				if (!pickupLoc || !destination || !date || !time || !price) {
+				if (!pickupLoc || !destination || !date || !price) {
 					alert("Fill out all fields please");
 					return;
 				}
 
 			  	var now = new Date();
-			  	if (dateTime <= now) {
+			  	if (date <= now) {
 			    	alert("Time travel doesn't exist!");
 			    	return;
 			  	}
 
-				var Rides = Parse.Object.extend("Rides");
-				var rides = new Rides();
+				var RideRequests = Parse.Object.extend("RideRequests");
+				var rides = new RideRequests();
 			  	rides.set("pickupLoc", pickupLoc);
 			  	rides.set("destination", destination);
-			  	rides.set("date", dateTime);
-			  	rides.set("numSeats", numSeats);
+			  	rides.set("date", date);
+			  	rides.set("startTime", startTime);
+			  	rides.set("endTime", endTime);
+			  	// rides.set("numSeats", numSeats);
 			  	rides.set("price", price);
 			  	rides.set("createdBy", Parse.User.current());
-			  	rides.set("riders", []);
 			  	rides.set("comments", comments);
+			  	// rides.set("riders", []);
 			  	var first = Parse.User.current().get("firstName");
 			  	var last = Parse.User.current().get("lastName");
-			  	var driverName = first + " " + last;
-			  	rides.set("driverName", driverName);
+			  	var riderName = first + " " + last;
+			  	rides.set("riderName", riderName);
 
 			  	rides.save(null, {
 					success: function(gameScore) {
 			  
 			 		alert("Ride created successfully.");
-			 		window.location.replace("drivers.html");
+			 		window.location.replace("riders.html");
 				},
 				error: function(gameScore, error) {
 			  		alert('Failed to create new object, with error code: ' + error.message);

@@ -27,6 +27,7 @@ $(document).ready(function() {
 	
 	var Rides = Parse.Object.extend("Rides");
 	var query = new Parse.Query(Rides);
+	query.ascending("date");
 	query.find({
 		success: function(rides) {
 			for (var i = 0; i < rides.length; i++) {
@@ -44,13 +45,13 @@ $(document).ready(function() {
 
 function displayRides() {
 	for (var i = 0; i < ridesArr.length; i++) {
-		//Date and time
 		var ride = ridesArr[i];
 
+		//Date and time
 		var date = new Date(ride.get("date"));
-		var localDate = date.toLocaleTimeString();
+		var time = date.toLocaleTimeString();
 		var day = weekday[date.getDay()];
-		var dateNode = "<p id=date>Date: " + day + ", " + localDate + "</p>";
+		var dateNode = "<p id=date>Date: " + day + ", " + (date.getMonth() + 1) + "/" + (date.getDay()) + "/" + (date.getFullYear()) + " at " + time + "</p>";
 
 		//Destination
 		var destination = ride.get("destination");
