@@ -73,6 +73,15 @@ function displayRides() {
 		var div = "<div class=ride>" + dateNode + destinationNode + priceNode + seatsNode + pickupNode + "</div><br><br>";
 			
 		$("#existingRides").append(div);
-	}
-		
+	}	
 }
+
+$("#pickupLoc").on("change", function(event) {
+
+});
+
+$("#date").datepicker({
+	onSelect: function(dateText) {
+		var d = new Date(dateText);
+	}
+});

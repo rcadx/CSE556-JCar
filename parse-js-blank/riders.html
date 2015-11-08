@@ -5,6 +5,8 @@
 	<script src="//www.parsecdn.com/js/parse-1.6.7.min.js"></script>
   	<script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<link href="http://code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 </head>
 <body>
 	<div id="main">
@@ -15,9 +17,35 @@
 			<div id="buttons">
 			<button id="newRideRequestBtn">New Ride Request</button>
 			<button id="myRidesBtn">My Rides</button>
-			<div id="existingRides">
-				<h3>Existing Rides</h3>
-				
+			<div id="mainPanels">
+				<div id="filters" style="width: 25%; height: 100%; float: left;">
+					<h3>Filter By</h3>
+					Location: <br>
+					<select id="pickupLoc">
+						<option value="None">No Preference</option>
+		  				<option value="Clocktower">Clocktower</option>
+		  				<option value="Village/Snow Way">Village/Snow Way</option>
+		  				<option value="Brookings">Brookings</option>
+		  				<option value="Lofts">Lofts</option>
+		  				<option value="DUC/Mallinkrodt Parking Lot">DUC/Mallinkrodt Parking lot</option>
+					</select><br><br>
+					Date: <br>
+					<input type="text" id="date"><br><br>
+					Time Range: <br>
+					<input type="time" id="startTime"> to <input type="time" id="endTime"><br><br>
+					Price (at most):<br>
+					<input type="number" id="price"><br><br>
+					Driver Rating (at least):<br>
+					<input type="radio" name="rating" value="5">5 Stars<br>
+					<input type="radio" name="rating" value="4">4 Stars<br>
+					<input type="radio" name="rating" value="3">3 Stars<br>
+					<input type="radio" name="rating" value="2">2 Stars<br>
+					<input type="radio" name="rating" value="1">1 Star<br><br>
+				</div>
+				<div id="existingRides" style="width: 75%; height: 100%; float: right;">
+					<h3>Available Rides</h3>
+					
+				</div>
 			</div>
 		</div>
 		</div>

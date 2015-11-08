@@ -5,13 +5,15 @@
 	<script src="//www.parsecdn.com/js/parse-1.6.7.min.js"></script>
   	<script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<link href="http://code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 </head>
 <body>
 	<div id="main">
 		<div id="loginFormDiv">
 			<h1>Create a Ride</h1>
 			Destination: <input type="text" id="destination"><br>
-			Date: <input type="date" id="date"><br>
+			Date: <input type="text" id="date"><br>
 			Pickup Time: <input type="time" id="time"><br>
 			Estimated Duration: <input type="number" id="duration"> hours<br>
 			Pickup Location: 
@@ -36,6 +38,8 @@
 		$("#cancelBtn").on("click", function() {
 			window.location.replace("drivers.html");
 		});
+
+		$("#date").datepicker();
 
 		$("#createRideBtn").on("click", function() {
 				var pickupLoc = $("#pickupLoc").val();
