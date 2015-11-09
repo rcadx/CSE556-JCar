@@ -27,6 +27,10 @@ $("input[type=radio][name=rating]").on("change", function() {
 	filterList();
 });
 
+$("#settings").on("click", function() {
+	window.location.replace("settings.html");
+});
+
 var weekday = new Array(7);
 weekday[0]=  "Sunday";
 weekday[1] = "Monday";
@@ -42,6 +46,7 @@ $(document).ready(function() {
 	var Rides = Parse.Object.extend("RideRequests");
 	var query = new Parse.Query(Rides);
 	query.ascending("date");
+	query.include("createdBy");
 	query.find({
 		success: function(rides) {
 			for (var i = 0; i < rides.length; i++) {
@@ -68,26 +73,36 @@ function displayRides(ridesArr) {
 		var endTime = end.toLocaleTimeString();
 		var date = new Date(ride.get("date"));
 		var day = weekday[date.getDay()];
-		var dateNode = "<p id=date>Date: " + day + ", " + (date.getMonth() + 1) + "/" + (date.getDate()) + "/" + (date.getFullYear()) + " from " + startTime + " to " + endTime + "</p>";
+		var dateNode = "<p id=date><b>Date:</b> " + day + ", " + (date.getMonth() + 1) + "/" + (date.getDate()) + "/" + (date.getFullYear()) + " from " + startTime + " to " + endTime + "</p>";
 
 		//Destination
 		var destination = ride.get("destination");
-		var destinationNode = "<p id=destination>Destination: " + destination + "</p>";
+		var destinationNode = "<p id='destination'><b>Destination:</b> " + destination + "</p>";
 
 		//Price
 		var price = ride.get("price");
-		var priceNode = "<p id=price>Requested Price: " + price + "</p>";
+		var priceNode = "<p id=price><b>Requested Price:</b> " + price + "</p>";
 
 		//Pickup Location
 		var pickupLoc = ride.get("pickupLoc");
-		var pickupNode = "<p id=price>Requested Pickup Location: " + pickupLoc + "</p>";
+		var pickupNode = "<p id='pickupLoc'><b>Requested Pickup Location:</b> " + pickupLoc + "</p>";
 
 		//Seats Needed
 		var numSeats = ride.get("numSeats");
-		var numSeatsNode = "<p id=numSeats>Number Seats Requested: " + numSeats + "</p>";
+		var numSeatsNode = "<p id='numSeats'><b>Number Seats Requested:</b> " + numSeats + "</p>";
+
+		//Facebook Picture of Driver
+		var rider = ride.get("createdBy");
+		var riderFBID = rider.get("fbID");
+		var riderProfPicURL = "https://graph.facebook.com/" + riderFBID + "/picture?type=normal";
+		var riderProfPicNode = "<img src=" + riderProfPicURL + "><br>";
+
+		//Name of Driver
+		var riderName = rider.get("firstName") + " " + rider.get("lastName");
+		var riderNameNode = "<p id='name'><b>Rider's Name:</b> " + riderName + "</p>"
 
 		//Outer Div
-		var div = "<div class=ride>" + dateNode + destinationNode + priceNode + pickupNode + numSeatsNode + "</div><br>";
+		var div = "<div class='ride'>" + riderProfPicNode + riderNameNode + dateNode + destinationNode + priceNode + pickupNode + numSeatsNode + "</div><br><br>";
 			
 		$("#rideRequests").append(div);
 	}		
