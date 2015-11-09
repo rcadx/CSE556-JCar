@@ -31,6 +31,16 @@ $("#settings").on("click", function() {
 	window.location.replace("settings.html");
 });
 
+$(document).on("click", '.bookRide', function() {
+	var id = $(this).attr("id");
+	bookRide(id);
+});
+
+$(document).on("click", '.unBookRide', function() {
+	var id = $(this).attr("id");
+	unBookRide(id);
+});
+
 var weekday = new Array(7);
 weekday[0]=  "Sunday";
 weekday[1] = "Monday";
@@ -101,8 +111,21 @@ function displayRides(ridesArr) {
 		var riderName = rider.get("firstName") + " " + rider.get("lastName");
 		var riderNameNode = "<p id='name'><b>Rider's Name:</b> " + riderName + "</p>"
 
+		//See if the ride has been booked already by you
+		var driver = ride.get("driver");
+		var user = Parse.User.current();
+		var booked = (driver && driver.id == user.id);
+
+		//I can Drive button
+		var button = "";
+		if (!booked) {
+			button = "<button class='bookRide' id='" + ride.id + "'>I CAN DRIVE</button>"
+		} else {
+			button = "<button class='unBookRide' id='" + ride.id + "'>I CAN NO LONGER DRIVE</button>";
+		}
+
 		//Outer Div
-		var div = "<div class='ride' style='border-style: solid'>" + riderProfPicNode + riderNameNode + dateNode + destinationNode + priceNode + pickupNode + numSeatsNode + "</div><br><br>";
+		var div = "<div class='ride' style='border-style: solid; border-color: " + (booked ? "green" : "black") + "'>" + riderProfPicNode + riderNameNode + dateNode + destinationNode + priceNode + pickupNode + numSeatsNode + button + "</div><br><br>";
 			
 		$("#rideRequests").append(div);
 	}		
@@ -167,9 +190,38 @@ function filterList() {
 			continue;
 		}
 
+
+
 		ridesToDisplay.push(ride);
 	}
 
 	clearRidesList();
 	displayRides(ridesToDisplay);
 }
+
+function bookRide(id) {
+	var Rides = Parse.Object.extend("RideRequests");
+	var ride = new Rides();
+	ride.id = id;
+	ride.set("driver", Parse.User.current());
+	ride.save();
+
+	alert("You have successfully said you can drive this ride request!");
+
+	clearRidesList();
+	displayRides(ridesArray);
+}
+
+function unBookRide(id) {
+	var Rides = Parse.Object.extend("RideRequests");
+	var ride = new Rides();
+	ride.id = id;
+	ride.unset("driver");
+	ride.save();
+
+	alert("You have successfully updated that you can no longer drive this ride!");
+	
+	clearRidesList();
+	displayRides(ridesArray);
+}
+
