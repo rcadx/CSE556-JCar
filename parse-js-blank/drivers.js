@@ -185,13 +185,6 @@ function filterList() {
 			continue;
 		}
 
-		var rideNumSeats = ride.get("numSeats");
-		if (numSeats && (rideNumSeats < numSeats)) {
-			continue;
-		}
-
-
-
 		ridesToDisplay.push(ride);
 	}
 

@@ -159,7 +159,7 @@ function filterList() {
 	var endTime = (end && date) ? new Date(d + " " + end) : "";
 
 	var price = $("#price").val() ? Number($("#price").val()) : "";
-	var rating = $("#rating").val() ? Number($("#rating").val()) : "";
+	var rating = $("input:radio[name='rating']:checked").val() ? Number($("input:radio[name='rating']:checked").val()) : "";
 	var numSeats = $("#numSeats").val() ? Number($("#numSeats").val()) : "";
 
 	var ridesToDisplay = new Array(); 
@@ -199,6 +199,11 @@ function filterList() {
 		var driver = ride.get("createdBy");
 		var driverRating = driver.get("rating");
 		if (rating && driverRating && (driverRating < rating)) {
+			continue;
+		}
+
+		var rideNumSeats = ride.get("numSeats");
+		if (numSeats && (rideNumSeats < numSeats)) {
 			continue;
 		}
 
