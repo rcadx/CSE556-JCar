@@ -25,6 +25,7 @@
   				<option value="DUC/Mallinkrodt Parking Lot">DUC/Mallinkrodt Parking lot</option>
 			</select><br>
 			Max Price Willing to Pay: $<input type="number" id="price"><br>
+			Number of Seats Needed: <input type="number" id="numSeats"><br>
 			Additional Comments: <input type="text" id="comments"><br>
 			<div id="buttons">
 			<button id="requestRideBtn">Submit Ride Request</button>
@@ -54,6 +55,7 @@
 				var startTime = new Date(d + " " + start);
 				var endTime = new Date(d + " " + end);
 				var price = Number($("#price").val());
+				var numSeats = Number($("#numSeats").val());
 				var comments = $("#comments").val();
 				if (!pickupLoc || !destination || !date || !price) {
 					alert("Fill out all fields please");
@@ -77,6 +79,7 @@
 			  	rides.set("price", price);
 			  	rides.set("createdBy", Parse.User.current());
 			  	rides.set("comments", comments);
+			  	rides.set("numSeats", numSeats);
 			  	// rides.set("riders", []);
 			  	var first = Parse.User.current().get("firstName");
 			  	var last = Parse.User.current().get("lastName");

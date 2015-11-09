@@ -12,6 +12,21 @@ $("#profileBtn").on("click", function() {
 	window.location.replace("profile.html");
 });
 
+$("#date").datepicker();
+
+
+$("#clearBtn").on("click", function() {
+	location.reload(); //cheap way of doing this lol
+});
+
+$("#destination, #pickupLoc, #date, #startTime, #endTime, #price, #numSeats").on("change", function() {
+	filterList();
+});
+
+$("input[type=radio][name=rating]").on("change", function() {
+	filterList();
+});
+
 var weekday = new Array(7);
 weekday[0]=  "Sunday";
 weekday[1] = "Monday";
@@ -21,7 +36,7 @@ weekday[4] = "Thursday";
 weekday[5] = "Friday";
 weekday[6] = "Saturday";
 
-var ridesArr = new Array();
+var ridesArray = new Array();
 
 $(document).ready(function() {
 	var Rides = Parse.Object.extend("RideRequests");
@@ -31,9 +46,9 @@ $(document).ready(function() {
 		success: function(rides) {
 			for (var i = 0; i < rides.length; i++) {
 				var ride = rides[i];
-				ridesArr.push(ride);
+				ridesArray.push(ride);
 			}
-			displayRides();
+			displayRides(ridesArray);
 		},
 		error: function(error) {
 			console.log("No rides found");
@@ -42,7 +57,7 @@ $(document).ready(function() {
 
 });
 
-function displayRides() {
+function displayRides(ridesArr) {
 	for (var i = 0; i < ridesArr.length; i++) {
 		var ride = ridesArr[i];
 
@@ -65,12 +80,81 @@ function displayRides() {
 
 		//Pickup Location
 		var pickupLoc = ride.get("pickupLoc");
-		var pickupNode = "<p id=price>Pickup Location: " + pickupLoc + "</p>";
+		var pickupNode = "<p id=price>Requested Pickup Location: " + pickupLoc + "</p>";
+
+		//Seats Needed
+		var numSeats = ride.get("numSeats");
+		var numSeatsNode = "<p id=numSeats>Number Seats Requested: " + numSeats + "</p>";
 
 		//Outer Div
-		var div = "<div class=ride>" + dateNode + destinationNode + priceNode + pickupNode + "</div><br><br>";
+		var div = "<div class=ride>" + dateNode + destinationNode + priceNode + pickupNode + numSeatsNode + "</div><br>";
 			
 		$("#rideRequests").append(div);
+	}		
+}
+
+function clearRidesList() {
+	$("#rideRequests").empty();
+}
+
+function filterList() {
+	var destination = $("#destination").val();
+	var pickupLoc = $("#pickupLoc").val();
+	var d = $("#date").val();
+	var date = d ? new Date(d) : "";
+	var start = $("#startTime").val();
+	var end = $("#endTime").val();
+
+	var startTime = (start && date) ? new Date(d + " " + start) : "";
+	var endTime = (end && date) ? new Date(d + " " + end) : "";
+
+	var price = $("#price").val() ? Number($("#price").val()) : "";
+	var numSeats = $("#numSeats").val() ? Number($("#numSeats").val()) : "";
+
+	var ridesToDisplay = new Array(); 
+
+	//Go through all the rides and push all the rides to the ridesToDisplay array that then displayArray will be called on, which will display all the rides
+	for (var i = 0; i < ridesArray.length; i++) {
+		var ride = ridesArray[i];
+
+		var rideDestination = ride.get("destination");
+		if (destination != "" && destination != rideDestination) {
+			continue;
+		}
+
+		var ridePickupLoc = ride.get("pickupLoc");
+		if (pickupLoc != "noPreference" && pickupLoc != ridePickupLoc) {
+			continue;
+		}
+
+		var rideStartTime = new Date(ride.get("startTime"));
+		var rideEndTime = new Date(ride.get("endTime"));
+
+		if (date && (date.getMonth() != rideDate.getMonth() || date.getDate() != rideDate.getDate() || date.getFullYear() != rideDate.getFullYear())) {	
+			continue;
+		}
+
+		if (startTime && !(startTime.getTime() < rideStartTime.getTime())) {
+			continue;
+		}
+
+		if (endTime && !(endTime.getTime() > rideEndTime.getTime())) {
+			continue;
+		}
+
+		var ridePrice = ride.get("price");
+		if (price && (price > ridePrice)) {
+			continue;
+		}
+
+		var rideNumSeats = ride.get("numSeats");
+		if (numSeats && (rideNumSeats < numSeats)) {
+			continue;
+		}
+
+		ridesToDisplay.push(ride);
 	}
-		
+
+	clearRidesList();
+	displayRides(ridesToDisplay);
 }

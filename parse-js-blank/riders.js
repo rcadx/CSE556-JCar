@@ -12,6 +12,21 @@ $("#profileBtn").on("click", function() {
 	window.location.replace("profile.html");
 });
 
+$("#date").datepicker();
+
+$("#clearBtn").on("click", function() {
+	location.reload(); //cheap way of doing this lol
+});
+
+//Filter method
+$("#destination, #pickupLoc, #date, #startTime, #endTime, #price, #numSeats").on("change", function() {
+	filterList();
+});
+
+$("input[type=radio][name=rating]").on("change", function() {
+	filterList();
+});
+
 var weekday = new Array(7);
 weekday[0]=  "Sunday";
 weekday[1] = "Monday";
@@ -78,13 +93,11 @@ function displayRides(ridesArr) {
 		var driverRatingNode = driverRating ? ("<p id=rating>Driver Rating: " + driverRating + "</p") : "<p>Driver Rating: This driver has no ratings yet.</p>"
 
 		//Outer Div
-		var div = "<div class=ride>" + dateNode + destinationNode + priceNode + seatsNode + pickupNode + driverRatingNode + "</div><br><br>";
+		var div = "<div class=ride>" + dateNode + destinationNode + priceNode + seatsNode + pickupNode + driverRatingNode + "</div><br>";
 			
 		$("#existingRides").append(div);
 	}	
 }
-
-$("#date").datepicker();
 
 function filterList() {
 	var destination = $("#destination").val();
@@ -141,27 +154,9 @@ function filterList() {
 			continue;
 		}
 
-		var rideNumSeats = ride.get("numSeats");
-		if (numSeats && (rideNumSeats < numSeats)) {
-			continue;
-		}
-
 		ridesToDisplay.push(ride);
 	}
 
 	clearRidesList();
 	displayRides(ridesToDisplay);
 }
-
-$("clearBtn").on("click", function() {
-	location.reload(); //cheap way of doing this lol
-});
-
-//Filter method
-$("#destination, #pickupLoc, #date, #startTime, #endTime, #price, #numSeats").on("change", function() {
-	filterList();
-});
-
-$("input[type=radio][name=rating]").on("change", function() {
-	filterList();
-});
