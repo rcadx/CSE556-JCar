@@ -20,9 +20,11 @@
 			<div id="mainPanels">
 				<div id="filters" style="width: 25%; height: 100%; float: left;">
 					<h3>Filter By</h3>
-					Location: <br>
+					Destination: <br>
+					<input type="text" id="destination"><br><br>
+					Pickup Location: <br>
 					<select id="pickupLoc">
-						<option value="None">No Preference</option>
+						<option value="noPreference">No Preference</option>
 		  				<option value="Clocktower">Clocktower</option>
 		  				<option value="Village/Snow Way">Village/Snow Way</option>
 		  				<option value="Brookings">Brookings</option>
@@ -31,7 +33,7 @@
 					</select><br><br>
 					Date: <br>
 					<input type="text" id="date"><br><br>
-					Time Range: <br>
+					Available Time Range (Fill out both fields): <br>
 					<input type="time" id="startTime"> to <input type="time" id="endTime"><br><br>
 					Price (at most):<br>
 					<input type="number" id="price"><br><br>
@@ -41,10 +43,15 @@
 					<input type="radio" name="rating" value="3">3 Stars<br>
 					<input type="radio" name="rating" value="2">2 Stars<br>
 					<input type="radio" name="rating" value="1">1 Star<br><br>
+					Seats Needed: <br>
+					<input type="number" id="numSeats"><br><br>
+					<button id="clearBtn">Clear</button>
 				</div>
-				<div id="existingRides" style="width: 75%; height: 100%; float: right;">
+				<div id="existingRidesDiv" style="width: 75%; height: 100%; float: right;">
 					<h3>Available Rides</h3>
-					
+					<div id="existingRides">
+						<!-- To be filled -->
+					</div>
 				</div>
 			</div>
 		</div>

@@ -45,7 +45,7 @@ function displayRides() {
 		var date = new Date(ride.get("date"));
 		var time = date.toLocaleTimeString();
 		var day = weekday[date.getDay()];
-		var dateNode = "<p id=date>Date: " + day + ", " + (date.getMonth() + 1) + "/" + (date.getDay()) + "/" + (date.getFullYear()) + " at " + time + "</p>";
+		var dateNode = "<p id=date>Date: " + day + ", " + (date.getMonth() + 1) + "/" + (date.getDate()) + "/" + (date.getFullYear()) + " at " + time + "</p>";
 
 		//Destination
 		var destination = ride.get("destination");

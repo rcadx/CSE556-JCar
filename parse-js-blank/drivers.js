@@ -47,13 +47,13 @@ function displayRides() {
 		var ride = ridesArr[i];
 
 		//Date and time
-		var date = new Date(ride.get("date"));
 		var start = new Date(ride.get("startTime"));
 		var end = new Date(ride.get("endTime"));
 		var startTime = start.toLocaleTimeString();
 		var endTime = end.toLocaleTimeString();
+		var date = new Date(ride.get("date"));
 		var day = weekday[date.getDay()];
-		var dateNode = "<p id=date>Date: " + day + ", " + (date.getMonth() + 1) + "/" + (date.getDay()) + "/" + (date.getFullYear()) + " from " + startTime + " to " + endTime + "</p>";
+		var dateNode = "<p id=date>Date: " + day + ", " + (date.getMonth() + 1) + "/" + (date.getDate()) + "/" + (date.getFullYear()) + " from " + startTime + " to " + endTime + "</p>";
 
 		//Destination
 		var destination = ride.get("destination");
