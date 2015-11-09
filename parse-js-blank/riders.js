@@ -31,6 +31,16 @@ $("input[type=radio][name=rating]").on("change", function() {
 	filterList();
 });
 
+$(document).on("click", '.bookRide', function() {
+	var id = $(this).attr("id");
+	bookRide(id);
+});
+
+$(document).on("click", '.unBookRide', function() {
+	var id = $(this).attr("id");
+	unBookRide(id);
+});
+
 var weekday = new Array(7);
 weekday[0]=  "Sunday";
 weekday[1] = "Monday";
@@ -48,6 +58,7 @@ $(document).ready(function() {
 	var query = new Parse.Query(Rides);
 	query.ascending("date");
 	query.include("createdBy");
+	query.include("objectId");
 	query.find({
 		success: function(rides) {
 			for (var i = 0; i < rides.length; i++) {
@@ -111,8 +122,26 @@ function displayRides(ridesArr) {
 		var driverName = driver.get("firstName") + " " + driver.get("lastName");
 		var driverNameNode = "<p id='name'><b>Driver's Name:</b> " + driverName + "</p><br>"
 
+		//See if the ride has been booked already by you
+		var riders = ride.get("riders");
+		var booked = false;
+		for (var j = 0; j < riders.length; j++) {
+			var user = Parse.User.current();
+			var rider = riders[j];
+			if (rider.id == user.id) {
+				booked = true;
+			}
+		}
+
+		var button = "";
+		if (booked) {
+			button = "<button class='unBookRide' id='" + ride.id + "'>UNBOOK RIDE</button>"
+		} else {
+			button = "<button class='bookRide' id='" + ride.id + "'>BOOK RIDE</button>";
+		}
+	
 		//Outer Div
-		var div = "<div class='ride' style='border-style: solid'>" + driverProfPicNode + driverName + dateNode + destinationNode + priceNode + seatsNode + pickupNode + driverRatingNode + "</div><br><br>";
+		var div = "<div class='ride' id='" + ride.id + "' style='border-style: solid; border-color: " + (booked ? "green" : "black") + "'>" + driverProfPicNode + driverName + dateNode + destinationNode + priceNode + seatsNode + pickupNode + driverRatingNode + button + "</div><br><br>";
 			
 		$("#existingRides").append(div);
 	}	
@@ -178,4 +207,30 @@ function filterList() {
 
 	clearRidesList();
 	displayRides(ridesToDisplay);
+}
+
+function bookRide(id) {
+	var Rides = Parse.Object.extend("Rides");
+	var ride = new Rides();
+	ride.id = id;
+	ride.add("riders", Parse.User.current());
+	ride.save();
+
+	alert("You have booked this ride!");
+
+	clearRidesList();
+	displayRides(ridesArray);
+}
+
+function unBookRide(id) {
+	var Rides = Parse.Object.extend("Rides");
+	var ride = new Rides();
+	ride.id = id;
+	ride.remove("riders", Parse.User.current());
+	ride.save();
+
+	alert("You have unbooked this ride!");
+	
+	clearRidesList();
+	displayRides(ridesArray);
 }
