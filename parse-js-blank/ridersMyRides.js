@@ -12,7 +12,7 @@ weekday[6] = "Saturday";
 var ridesArr = new Array();
 
 $("#backToHome").on("click", function() {
-	window.location.replace("drivers.html");
+	window.location.replace("riders.html");
 });
 
 $(document).ready(function() {

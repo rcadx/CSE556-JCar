@@ -57,6 +57,9 @@
 					}
 				});
 			// }
+
+			user.unset("fbID");
+			user.save();
 		});
 
 		$("#home").on("click", function() {

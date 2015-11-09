@@ -26,9 +26,8 @@ $(document).ready(function() {
 			for (var i = 0; i < rides.length; i++) {
 				var ride = rides[i];
 				ridesArr.push(ride);
-
-				displayRides();
 			}
+			displayRides();
 		},
 		error: function(error) {
 			console.log("No rides found");
