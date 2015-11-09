@@ -20,7 +20,7 @@
 			<button id="newRideRequestBtn">New Ride Request</button>
 			<button id="myRidesBtn">My Rides</button>
 			<div id="mainPanels">
-				<div id="filters" style="width: 25%; height: 100%; float: left;">
+				<div class="overlay-content" id="filters" style="width: 25%; height: 100%; float: left;">
 					<h3>Filter By</h3>
 					Destination: <br>
 					<input type="text" id="destination"><br><br>
@@ -46,12 +46,12 @@
 					<input type="radio" name="rating" value="2">2 Stars<br>
 					<input type="radio" name="rating" value="1">1 Star<br><br>
 					Seats Needed: <br>
-					<input type="number" id="numSeats"><br><br>
+					<input type="number" id="numSeats"><br>
 					<button id="clearBtn">Clear</button>
 				</div>
-				<div id="existingRidesDiv" style="width: 75%; height: 100%; float: right;">
-					<h3>Available Rides</h3>
-					<div id="existingRides">
+				<div class="overlay-content" id="existingRidesDiv" style="width: 75%; height: 450px; float: right">
+					<h2>Available Rides</h2>
+					<div id="existingRides" style="height: 100%; overflow: scroll">
 						<!-- To be filled -->
 					</div>
 				</div>
