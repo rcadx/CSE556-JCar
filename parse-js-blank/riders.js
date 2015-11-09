@@ -93,9 +93,14 @@ function displayRides(ridesArr) {
 		var pickupLoc = ride.get("pickupLoc");
 		var pickupNode = "<p id='pickupLoc'><b>Pickup Location:</b> " + pickupLoc + "</p>";
 
+		//Driver rating
 		var driver = ride.get("createdBy");
-		var driverRating = driver.get("rating");
-		var driverRatingNode = driverRating ? ("<p id=rating><b>Driver Rating:</b> " + driverRating + "</p") : "<p>Driver Rating: This driver has no ratings yet.</p>"
+		var driverRating = Number(driver.get("rating"));
+		var stars = "";
+		for (var j = 0; j < driverRating; j++) {
+			stars += "<img src='Star.png'>"
+		}
+		var driverRatingNode = driverRating ? ("<p id=rating><b>Driver Rating:</b> " + stars + "</p") : "<p>Driver Rating: This driver has no ratings yet.</p>"
 
 		//Facebook Picture of Driver
 		var driverFBID = driver.get("fbID");
