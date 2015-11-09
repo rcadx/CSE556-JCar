@@ -214,6 +214,7 @@ function bookRide(id) {
 	var ride = new Rides();
 	ride.id = id;
 	ride.add("riders", Parse.User.current());
+	ride.increment("numSeats", -1);
 	ride.save();
 
 	alert("You have booked this ride!");
@@ -227,6 +228,7 @@ function unBookRide(id) {
 	var ride = new Rides();
 	ride.id = id;
 	ride.remove("riders", Parse.User.current());
+	ride.increment("numSeats", 1);
 	ride.save();
 
 	alert("You have unbooked this ride!");
