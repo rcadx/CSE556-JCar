@@ -100,7 +100,7 @@ function displayRides(ridesArr) {
 		for (var j = 0; j < driverRating; j++) {
 			stars += "<img src='Star.png'>"
 		}
-		var driverRatingNode = driverRating ? ("<p id=rating><b>Driver Rating:</b> " + stars + "</p") : "<p>Driver Rating: This driver has no ratings yet.</p>"
+		var driverRatingNode = driverRating ? ("<p id=rating><b>Driver Rating:</b> " + stars + "</p>") : "<p>Driver Rating: This driver has no ratings yet.</p>"
 
 		//Facebook Picture of Driver
 		var driverFBID = driver.get("fbID");
@@ -112,7 +112,7 @@ function displayRides(ridesArr) {
 		var driverNameNode = "<p id='name'><b>Driver's Name:</b> " + driverName + "</p><br>"
 
 		//Outer Div
-		var div = "<div class=ride>" + driverProfPicNode + driverName + dateNode + destinationNode + priceNode + seatsNode + pickupNode + driverRatingNode + "</div><br><br>";
+		var div = "<div class='ride' style='border-style: solid'>" + driverProfPicNode + driverName + dateNode + destinationNode + priceNode + seatsNode + pickupNode + driverRatingNode + "</div><br><br>";
 			
 		$("#existingRides").append(div);
 	}	

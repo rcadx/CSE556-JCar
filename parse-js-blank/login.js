@@ -14,6 +14,11 @@ $("#loginBtn").on("click", function(event) {
   Parse.User.logIn(username, password, {
   success: function(user) {
     // Do stuff after successful login.
+    // FB.login(function(response) {
+
+    // }, {
+    //   scope: 'user_friends'
+    // });
     var user = Parse.User.current();
     var isDriver = user.get("driver");
     if (isDriver) {

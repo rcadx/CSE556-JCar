@@ -102,7 +102,7 @@ function displayRides(ridesArr) {
 		var riderNameNode = "<p id='name'><b>Rider's Name:</b> " + riderName + "</p>"
 
 		//Outer Div
-		var div = "<div class='ride'>" + riderProfPicNode + riderNameNode + dateNode + destinationNode + priceNode + pickupNode + numSeatsNode + "</div><br><br>";
+		var div = "<div class='ride' style='border-style: solid'>" + riderProfPicNode + riderNameNode + dateNode + destinationNode + priceNode + pickupNode + numSeatsNode + "</div><br><br>";
 			
 		$("#rideRequests").append(div);
 	}		
