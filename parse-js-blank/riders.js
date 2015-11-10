@@ -98,7 +98,7 @@ function displayRides(ridesArr) {
 		var priceNode = "<p id='price'><b>Price:</b> " + price + "</p>";
 
 		//Available seats
-		var seats = ride.get("numSeats");
+		var seats = Number(ride.get("numSeats"));
 		var seatsNode = "<p id='numSeats'><b>Seats Available:</b> " + seats + "</p>";
 
 		//Pickup Location
@@ -145,12 +145,15 @@ function displayRides(ridesArr) {
 		}
 		riderNamesNode += "</p>"
 
-
 		var button = "";
 		if (booked) {
 			button = "<button class='unBookRide' id='" + ride.id + "'>UNBOOK RIDE</button>"
 		} else {
 			button = "<button class='bookRide' id='" + ride.id + "'>BOOK RIDE</button>";
+		}
+
+		if (seats <= 0) {
+			button = "<label><b>NO MORE AVAILABLE SEATS</b></label>"
 		}
 	
 		//Outer Div
@@ -215,6 +218,10 @@ function filterList() {
 			continue;
 		}
 
+		if (!driverRating) {
+			continue;
+		}
+
 		var rideNumSeats = ride.get("numSeats");
 		if (numSeats && (rideNumSeats < numSeats)) {
 			continue;
@@ -232,6 +239,10 @@ function bookRide(id) {
 	var ride = new Rides();
 	ride.id = id;
 	ride.add("riders", Parse.User.current());
+	if (ride.get("numSeats") <= 0) {
+		alert("You can't book this ride, there are no more available seats");
+		return;
+	}
 	ride.increment("numSeats", -1);
 	ride.save();
 
