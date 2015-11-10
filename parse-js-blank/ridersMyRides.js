@@ -10,6 +10,7 @@ weekday[5] = "Friday";
 weekday[6] = "Saturday";
 
 var ridesArr = new Array();
+var bookedRidesArr = new Array();
 
 $("#backToHome").on("click", function() {
 	window.location.replace("riders.html");
@@ -24,9 +25,17 @@ $(document).ready(function() {
 		success: function(rides) {
 			for (var i = 0; i < rides.length; i++) {
 				var ride = rides[i];
-				ridesArr.push(ride);
+				var driver = ride.get("driver");
+				if (!driver) {
+					ridesArr.push(ride);
+				} 
+				else {
+					bookedRidesArr.push(ride);
+				}
+			
 			}
 			displayRides();
+			displayBookedRides();
 		},
 		error: function(error) {
 			console.log("No rides found");
@@ -66,4 +75,36 @@ function displayRides() {
 		$("#myRidesList").append(div);
 	}
 		
+}
+
+function displayBookedRides() {
+for (var i = 0; i < bookedRidesArr.length; i++) {
+		//Date and time
+		var ride = bookedRidesArr[i];
+
+		var date = new Date(ride.get("date"));
+		var start = new Date(ride.get("startTime"));
+		var end = new Date(ride.get("endTime"));
+		var startTime = start.toLocaleTimeString();
+		var endTime = end.toLocaleTimeString();
+		var day = weekday[date.getDay()];
+		var dateNode = "<p id=date>Date: " + day + ", " + (date.getMonth() + 1) + "/" + (date.getDate()) + "/" + (date.getFullYear()) + " from " + startTime + " to " + endTime + "</p>";
+
+		//Destination
+		var destination = ride.get("destination");
+		var destinationNode = "<p id=destination>Destination: " + destination + "</p>";
+
+		//Price
+		var price = ride.get("price");
+		var priceNode = "<p id=price>Price: " + price + "</p>";
+
+		//Pickup Location
+		var pickupLoc = ride.get("pickupLoc");
+		var pickupNode = "<p id=price>Pickup Location: " + pickupLoc + "</p>";
+
+		//Outer Div
+		var div = "<div class=ride>" + dateNode + destinationNode + priceNode + pickupNode + "</div><br><br>";
+			
+		$("#bookedRidesList").append(div);
+	}
 }
