@@ -21,6 +21,12 @@ $(document).on("click", '.unBookRide', function() {
 	var id = $(this).attr("id");
 	unBookRide(id);
 });
+//contact driver
+$(document).on("click", '.contactDriverBtn', function() {
+	var id = $(this).attr("id");
+	contactDriver(id);
+});
+
 
 $(document).on("click", '.cancelRideRequest', function() {
 	var id = $(this).attr("id");
@@ -114,7 +120,7 @@ function displayPendingRideRequests() {
 		var button = "<button class='cancelRideRequest' id='" + ride.id + "'>CANCEL RIDE</button>";
 
 		//Outer Div
-		var div = "<div class=ride>" + dateNode + destinationNode + priceNode + pickupNode + button + "</div><br><br>";
+		var div = "<div class=ride>" + dateNode + destinationNode + priceNode + pickupNode + button  +"</div><br><br>";
 			
 		$("#pendingRideRequestsList").append(div);
 	}
@@ -200,6 +206,8 @@ function displayBookedDriverSubmittedRides() {
 			var driverName = driver.get("firstName") + " " + driver.get("lastName");
 			var driverNameNode = "<p id='name'><b>Driver's Name:</b> " + driverName + "</p><br>"
 
+			//contact driver
+			var contactDriverBtn = "<button class='contactDriverBtn' id='" + driverFBID +"'>CONTACT DRIVER</button>"
 			//See if the ride has been booked already by you
 			var riders = ride.get("riders");
 			var booked = false;
@@ -219,7 +227,7 @@ function displayBookedDriverSubmittedRides() {
 			}
 		
 			//Outer Div
-			var div = "<div class='ride' id='" + ride.id + "' style='border-style: solid; border-color: " + "black" + "'>" + driverProfPicNode + driverName + dateNode + destinationNode + priceNode + seatsNode + pickupNode + driverRatingNode + button + "</div><br><br>";
+			var div = "<div class='ride' id='" + ride.id + "' style='border-style: solid; border-color: " + "black" + "'>" + driverProfPicNode + driverName + "<p />" + contactDriverBtn + dateNode + destinationNode + priceNode + seatsNode + pickupNode + driverRatingNode + button + "</div><br><br>";
 			
 			$("#bookedRidesList").append(div);
 		}	
@@ -236,6 +244,23 @@ function unBookRide(id) {
 	alert("You have unbooked this ride!");
 	
 	location.reload();
+}
+
+function contactDriver(id) {
+//id = driverFBId
+	var DriverInfo = Parse.Object.extend("DriverInfo");
+	var query = new Parse.Query(DriverInfo);
+	query.get(id, {
+		success: function(myObj) {
+			//display driver number in a new popup
+			//TODO: phoneNum
+			var phoneNum = "";
+			alert("Driver phone number:\n"+phoneNum);
+		},
+		error: function(myObj) {
+
+	    }
+	  });  
 }
 
 function cancelRideRequest(id) {
