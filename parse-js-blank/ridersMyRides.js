@@ -32,6 +32,7 @@ $(document).ready(function() {
 	var Rides = Parse.Object.extend("RideRequests");
 	var query = new Parse.Query(Rides);
 	query.equalTo("createdBy", Parse.User.current());
+	query.include("driver");
 	query.ascending("date");
 	query.find({
 		success: function(rides) {
@@ -132,25 +133,47 @@ for (var i = 0; i < bookedRidesArr.length; i++) {
 		var startTime = start.toLocaleTimeString();
 		var endTime = end.toLocaleTimeString();
 		var day = weekday[date.getDay()];
-		var dateNode = "<p id=date>Date: " + day + ", " + (date.getMonth() + 1) + "/" + (date.getDate()) + "/" + (date.getFullYear()) + " from " + startTime + " to " + endTime + "</p>";
+		var dateNode = "<p id=date><b>Date:</b> " + day + ", " + (date.getMonth() + 1) + "/" + (date.getDate()) + "/" + (date.getFullYear()) + " from " + startTime + " to " + endTime + "</p>";
 
 		//Destination
 		var destination = ride.get("destination");
-		var destinationNode = "<p id=destination>Destination: " + destination + "</p>";
+		var destinationNode = "<p id=destination><b>Destination:</b> " + destination + "</p>";
 
 		//Price
 		var price = ride.get("price");
-		var priceNode = "<p id=price>Requested Price: " + price + "</p>";
+		var priceNode = "<p id=price><b>Requested Price:</b> " + price + "</p>";
 
 		//Pickup Location
 		var pickupLoc = ride.get("pickupLoc");
-		var pickupNode = "<p id=price>Pickup Location: " + pickupLoc + "</p>";
+		var pickupNode = "<p id=price><b>Pickup Location:</b> " + pickupLoc + "</p>";
 
 		//cancel button
 		var button = "<button class='cancelRideRequest' id='" + ride.id + "'>CANCEL RIDE</button>";
 
+		//Driver rating
+		var driver = ride.get("driver");
+		var driverRating = Number(driver.get("rating"));
+		var stars = "";
+		for (var j = 0; j < driverRating; j++) {
+			stars += "<img src='Star.png'>"
+		}
+		var driverRatingNode = driverRating ? ("<p id=rating><b>Driver Rating:</b> " + stars + "</p>") : "<p>Driver Rating: This driver has no ratings yet.</p>"
+
+		//Facebook Picture of Driver
+		var driverFBID = driver.get("fbID");
+		var driverProfPicURL = "'https://graph.facebook.com/" + driverFBID + "/picture?type=normal'";
+		var driverProfPicNode = "<img src=" + driverProfPicURL + "><br>";
+
+		//Name of Driver
+		var driverName = driver.get("firstName") + " " + driver.get("lastName");
+		var driverNameNode = "<p id='name'><b>Driver's Name:</b> " + driverName + "</p>"
+
+		var driverPhone = driver.get("phone");
+		var driverPhoneNode = "<p id='phone'><b>Driver's Phone Number:</b> " + driverPhone + "</p>"
+
+
 		//Outer Div
-		var div = "<div class=ride>" + dateNode + destinationNode + priceNode + pickupNode + button + "</div><br><br>";
+		var div = "<div class=ride>" + driverProfPicNode + driverNameNode + driverRatingNode + driverPhoneNode + dateNode + destinationNode + priceNode + pickupNode + button + "</div><br><br>";
 			
 		$("#acceptedRideRequestsList").append(div);
 	}
@@ -194,11 +217,14 @@ function displayBookedDriverSubmittedRides() {
 			//Facebook Picture of Driver
 			var driverFBID = driver.get("fbID");
 			var driverProfPicURL = "'https://graph.facebook.com/" + driverFBID + "/picture?type=normal'";
-			var driverProfPicNode = "<img src=" + driverProfPicURL + "><br>";
+			var driverProfPicNode = "<img src=" + driverProfPicURL + "><br><br>";
 
 			//Name of Driver
 			var driverName = driver.get("firstName") + " " + driver.get("lastName");
-			var driverNameNode = "<p id='name'><b>Driver's Name:</b> " + driverName + "</p><br>"
+			var driverNameNode = "<p id='name'><b>Submitted By:</b> " + driverName + "</p>"
+
+			var driverPhone = driver.get("phone");
+			var driverPhoneNode = "<p id='phone'><b>Driver's Phone Number:</b> " + driverPhone + "</p>"
 
 			//See if the ride has been booked already by you
 			var riders = ride.get("riders");
@@ -219,7 +245,7 @@ function displayBookedDriverSubmittedRides() {
 			}
 		
 			//Outer Div
-			var div = "<div class='ride' id='" + ride.id + "' style='border-style: solid; border-color: " + "black" + "'>" + driverProfPicNode + driverName + dateNode + destinationNode + priceNode + seatsNode + pickupNode + driverRatingNode + button + "</div><br><br>";
+			var div = "<div class='ride' id='" + ride.id + "' style='border-style: solid; border-color: " + "black" + "'>" + driverProfPicNode + driverName + driverRatingNode + driverPhoneNode + dateNode + destinationNode + priceNode + seatsNode + pickupNode + button + "</div><br><br>";
 			
 			$("#bookedRidesList").append(div);
 		}	
