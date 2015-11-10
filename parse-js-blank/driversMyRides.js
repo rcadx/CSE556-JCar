@@ -137,7 +137,7 @@ function displayAcceptedRides() {
 
 		//Name of Driver
 		var riderName = rider.get("firstName") + " " + rider.get("lastName");
-		var riderNameNode = "<p id='name'><b>Rider's Name:</b> " + riderName + "</p>"
+		var riderNameNode = "<p id='name'><b>Rider's Name:</b> " + riderName + "</p>";
 
 		//See if the ride has been booked already by you
 		var driver = ride.get("driver");
