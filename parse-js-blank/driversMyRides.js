@@ -9,7 +9,8 @@ weekday[4] = "Thursday";
 weekday[5] = "Friday";
 weekday[6] = "Saturday";
 
-var ridesArr = new Array();
+var ridesArray = new Array();
+var acceptedRidesArray = new Array();
 
 $("#backToHome").on("click", function() {
 	window.location.replace("drivers.html");
@@ -25,9 +26,25 @@ $(document).ready(function() {
 		success: function(rides) {
 			for (var i = 0; i < rides.length; i++) {
 				var ride = rides[i];
-				ridesArr.push(ride);
+				ridesArray.push(ride);
 			}
-			displayRides();
+			displayRides(ridesArray, false);
+		},
+		error: function(error) {
+			console.log("No rides found");
+		}
+	});
+
+	var Rides = Parse.Object.extend("RideRequests");
+	var query = new Parse.Query(Rides);
+	query.equalTo("driver", Parse.User.current());
+	query.find({
+		success: function(rides) {
+			for (var i = 0; i < rides.length; i++) {
+				var ride = rides[i];
+				acceptedRidesArray.push(ride);
+			}
+			displayRides(acceptedRidesArray, true);
 		},
 		error: function(error) {
 			console.log("No rides found");
@@ -36,7 +53,7 @@ $(document).ready(function() {
 
 });
 
-function displayRides() {
+function displayRides(ridesArr, accepted) { //accepted parameter is flag for whether to append ride to acceptedRidesList or myRidesList in html
 	for (var i = 0; i < ridesArr.length; i++) {
 		//Date and time
 		var ride = ridesArr[i];
@@ -65,7 +82,11 @@ function displayRides() {
 		//Outer Div
 		var div = "<div class=ride>" + dateNode + destinationNode + priceNode + seatsNode + pickupNode + "</div><br><br>";
 			
-		$("#myRidesList").append(div);
+		if (accepted) {
+			$("#acceptedRidesList").append(div);
+		} else {
+			$("#myRidesList").append(div);
+		}
 	}
 		
 }
