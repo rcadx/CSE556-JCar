@@ -8,46 +8,51 @@
 	<link rel="stylesheet" type="text/css" href="signup.css">
 </head>
 <body>
+	<script>
+	Parse.initialize("eamcKJmUTepWXqQzYx5iNmgVUcX55xvCQX749IfY", "Gg3ZOGnMTkHaMIOZ0OJHsig6QwU5j8Jev2RkIZML");
+
+	  window.fbAsyncInit = function() {
+	    Parse.FacebookUtils.init({
+	      appId      : '167066316976721',
+	      status	 : true,
+	      cookie	 : true,	
+	      xfbml      : true,
+	      version    : 'v2.5'
+	    });
+	  };
+
+	  (function(d, s, id){
+	     var js, fjs = d.getElementsByTagName(s)[0];
+	     if (d.getElementById(id)) {return;}
+	     js = d.createElement(s); js.id = id;
+	     js.src = "//connect.facebook.net/en_US/sdk.js";
+	     fjs.parentNode.insertBefore(js, fjs);
+	   }(document, 'script', 'facebook-jssdk'));
+	</script>
 	<div id="main">
 		<div id="signUpFormDiv">
-			<h1>Sign up for JCar</h1>
 			<div id="signUpForm">
 				First Name<br><input type="text" id="firstName"><br>
-				<br>
 				Last Name<br><input type="text" id="lastName"><br>
-				<br>
 				Username<br><input type="text" id="username"><br>
-				<br>
 				WUSTL Email<br><input type="text" id="email"><br>
-				<br>
 				Phone Number<br><input type="text" id="phone"><br>
-				<br>
-				Password<br>
-				<p id="passwordSpecification">
-					<em>*Passwords must be at least 6 characters and must have at least 1 letter, 1 number, and 1 non-alphanumeric character ( "!@#\()–[{}]:;',?/*"")*</em><br>
-				</p>
-				<input type="password" id="password"><br>
-				<br>
+				Password<br><input type="password" id="password"><br>
 				Confirm Password<br>
+				<p id="passwordHint">*Passwords must be at least 6 characters and must have at least 1 letter, 1 number, and 1 non-alphanumeric character ( "!@#\()–[{}]:;',?/*"")*</p>
 				<input type="password" id="confirmPassword"><br>
-				<br>
 				Do you have a car?<br>
 					<input type="radio" id="yesCar" name="car" value="yes" checked>Yes</input>
 					<input type="radio" id="noCar" name="car" value="no">No</input><br>
-					<br>
 				<div id="yesCarExpand">
 					Car color<br><input type="text" id="carColor"><br>
-					<br>
 					Car model<br><input type="text" id="carModel"><br>
-					<br>
-					Number of seats available<br><input type="number" id="numSeats" value="0"><br>
-					<br>
+					Number of seats available<br><input type="number" id="numSeats"><br>
 				</div>
 				Payment Method<br>
 					<input type="radio" id="Card" name="payment" value="Card" checked>Debit/Credit Card</input>
 					<input type="radio" id="Paypal" name="payment" value="Paypal">Paypal</input>
 					<input type="radio" id="Cash" name="payment" value="Cash">Cash</input><br>
-				<br>
 				<button id="signUpBtn">Sign Up</button>
 			</div>
 		</div>

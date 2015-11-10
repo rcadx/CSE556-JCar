@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<head>
+	<title>JCar</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="//www.parsecdn.com/js/parse-1.6.7.min.js"></script>
+  	<script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<link href="http://code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+</head>
+<body>
+	<script type="text/javascript" src="initialize.js"></script>
+	<div id="main">
+		<div id="loginFormDiv">
+			<h1>Welcome</h1>
+			<button id="profileBtn">Profile</button>
+			<button id="logoutBtn">Logout</button>
+			<button id="settings">Settings</button>
+			<div id="buttons">
+			<button id="newRideRequestBtn">New Ride Request</button>
+			<button id="myRidesBtn">My Rides</button>
+			<div id="mainPanels">
+				<div class="overlay-content" id="filters" style="width: 25%; height: 100%; float: left;">
+					<h3>Filter By</h3>
+					Destination: <br>
+					<input type="text" id="destination"><br><br>
+					Pickup Location: <br>
+					<select id="pickupLoc">
+						<option value="noPreference">No Preference</option>
+		  				<option value="Clocktower">Clocktower</option>
+		  				<option value="Village/Snow Way">Village/Snow Way</option>
+		  				<option value="Brookings">Brookings</option>
+		  				<option value="Lofts">Lofts</option>
+		  				<option value="DUC/Mallinkrodt Parking Lot">DUC/Mallinkrodt Parking lot</option>
+					</select><br><br>
+					Date: <br>
+					<input type="text" id="date"><br><br>
+					Available Time Range (Fill out both fields): <br>
+					<input type="time" id="startTime"> to <input type="time" id="endTime"><br><br>
+					Price (at most):<br>
+					<input type="number" id="price"><br><br>
+					Driver Rating (at least):<br>
+					<input type="radio" name="rating" value="5">5 Stars<br>
+					<input type="radio" name="rating" value="4">4 Stars<br>
+					<input type="radio" name="rating" value="3">3 Stars<br>
+					<input type="radio" name="rating" value="2">2 Stars<br>
+					<input type="radio" name="rating" value="1">1 Star<br><br>
+					Seats Needed: <br>
+					<input type="number" id="numSeats"><br>
+					<button id="clearBtn">Clear Filter</button>
+				</div>
+				<div class="overlay-content" id="existingRidesDiv" style="width: 75%; height: 450px; float: right">
+					<h2>Available Rides</h2>
+					<div id="existingRides" style="height: 100%; overflow: scroll">
+						<!-- Filled dynamically in riders.js -->
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="logout.js"></script>
+	<script type="text/javascript" src="riders.js"></script>
+</body>
+</html>
