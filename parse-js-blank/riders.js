@@ -59,6 +59,7 @@ $(document).ready(function() {
 	query.ascending("date");
 	query.include("createdBy");
 	query.include("objectId");
+	query.include("riders");
 	query.find({
 		success: function(rides) {
 			for (var i = 0; i < rides.length; i++) {
@@ -124,14 +125,26 @@ function displayRides(ridesArr) {
 
 		//See if the ride has been booked already by you
 		var riders = ride.get("riders");
+		var riderNamesNode = "<p id='ridersNames'><b>Other Riders:</b>";
+
 		var booked = false;
 		for (var j = 0; j < riders.length; j++) {
 			var user = Parse.User.current();
 			var rider = riders[j];
 			if (rider.id == user.id) {
 				booked = true;
-			}
+			} else {
+				riderNamesNode += " " + rider.get("firstName") + " " + rider.get("lastName");
+			if (j < riders.length - 1) {
+				riderNamesNode += ", ";
+			} else {
+				riderNamesNode += " ";
+			}	
 		}
+			
+		}
+		riderNamesNode += "</p>"
+
 
 		var button = "";
 		if (booked) {
@@ -141,7 +154,7 @@ function displayRides(ridesArr) {
 		}
 	
 		//Outer Div
-		var div = "<div class='ride' id='" + ride.id + "' style='border-style: solid; border-color: " + (booked ? "green" : "black") + "'>" + driverProfPicNode + driverName + dateNode + destinationNode + priceNode + seatsNode + pickupNode + driverRatingNode + button + "</div><br><br>";
+		var div = "<div class='ride' id='" + ride.id + "' style='border-style: solid; border-color: " + (booked ? "green" : "black") + "'>" + driverProfPicNode + driverName + dateNode + destinationNode + priceNode + seatsNode + pickupNode + riderNamesNode + driverRatingNode + button + "</div><br><br>";
 			
 		$("#existingRides").append(div);
 	}	
