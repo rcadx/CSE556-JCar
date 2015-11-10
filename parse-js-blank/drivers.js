@@ -168,7 +168,7 @@ function filterList() {
 		var rideStartTime = new Date(ride.get("startTime"));
 		var rideEndTime = new Date(ride.get("endTime"));
 
-		if (date && (date.getMonth() != rideDate.getMonth() || date.getDate() != rideDate.getDate() || date.getFullYear() != rideDate.getFullYear())) {	
+		if (date && (date.getMonth() != rideStartTime.getMonth() || date.getDate() != rideStartTime.getDate() || date.getFullYear() != rideStartTime.getFullYear())) {	
 			continue;
 		}
 
