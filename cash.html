@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+	<title>JCar</title>
+	  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	  <script src="//www.parsecdn.com/js/parse-1.6.7.min.js"></script>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body>
+	<div id="main">
+		<div id="paymentDiv">
+			<h1>Payment Policy for Cash/Venmo Users</h1>
+			<div id="paymentForm">
+				<p>Riders are required to pay by cash and/or Venmo at the end of each ride. Failure to do so will result in permanent removal of account from JCar. Drivers will confirm payment once riders have done so.</p>
+
+				<input class="radio" type="radio" name="check" value="checkAccept" checked>I Accept<br>
+				<input class="radio" type="radio" name="check" value="checkDeny">I Do Not Accept<br>
+				<button id="submitBtn">Submit</button>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$("#submitBtn").click(function(event) {
+			var check = document.querySelector('input[name="check"]:checked').value;
+  			if (check == "checkAccept") {
+  				window.location.replace("TandC.html");
+  			} else {
+  				window.location.replace("signup.html");
+  			}
+
+		});
+	</script>
+
+</body>
+</html>
