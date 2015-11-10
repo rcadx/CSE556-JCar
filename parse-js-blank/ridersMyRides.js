@@ -22,6 +22,11 @@ $(document).on("click", '.unBookRide', function() {
 	unBookRide(id);
 });
 
+$(document).on("click", '.cancelRideRequest', function() {
+	var id = $(this).attr("id");
+	cancelRideRequest(id);
+});
+
 $(document).ready(function() {
 	//Get all ride requests the user made
 	var Rides = Parse.Object.extend("RideRequests");
@@ -41,7 +46,7 @@ $(document).ready(function() {
 				}
 			
 			}
-			displayRides();
+			displayPendingRideRequests();
 			displayAcceptedRideRequestsList();
 		},
 		error: function(error) {
@@ -80,7 +85,7 @@ $(document).ready(function() {
 
 });
 
-function displayRides() {
+function displayPendingRideRequests() {
 	for (var i = 0; i < ridesArr.length; i++) {
 		//Date and time
 		var ride = ridesArr[i];
@@ -105,8 +110,11 @@ function displayRides() {
 		var pickupLoc = ride.get("pickupLoc");
 		var pickupNode = "<p id=price>Pickup Location: " + pickupLoc + "</p>";
 
+		//cancel button
+		var button = "<button class='cancelRideRequest' id='" + ride.id + "'>CANCEL RIDE</button>";
+
 		//Outer Div
-		var div = "<div class=ride>" + dateNode + destinationNode + priceNode + pickupNode + "</div><br><br>";
+		var div = "<div class=ride>" + dateNode + destinationNode + priceNode + pickupNode + button + "</div><br><br>";
 			
 		$("#pendingRideRequestsList").append(div);
 	}
@@ -138,8 +146,11 @@ for (var i = 0; i < bookedRidesArr.length; i++) {
 		var pickupLoc = ride.get("pickupLoc");
 		var pickupNode = "<p id=price>Pickup Location: " + pickupLoc + "</p>";
 
+		//cancel button
+		var button = "<button class='cancelRideRequest' id='" + ride.id + "'>CANCEL RIDE</button>";
+
 		//Outer Div
-		var div = "<div class=ride>" + dateNode + destinationNode + priceNode + pickupNode + "</div><br><br>";
+		var div = "<div class=ride>" + dateNode + destinationNode + priceNode + pickupNode + button + "</div><br><br>";
 			
 		$("#acceptedRideRequestsList").append(div);
 	}
@@ -225,4 +236,27 @@ function unBookRide(id) {
 	alert("You have unbooked this ride!");
 	
 	location.reload();
+}
+
+function cancelRideRequest(id) {
+	var RideRequests = Parse.Object.extend("RideRequests");
+	var query = new Parse.Query(RideRequests);
+	query.get(id, {
+  		success: function(myObj) {
+	    // The object was retrieved successfully.
+	    myObj.destroy({
+	    	success: function(myObj) {
+	    		alert("You have successfully canceled this ride request!");
+	    		location.reload();
+	    	},
+	    	error: function(myObj) {
+
+	    	}
+	    });
+	  },
+	  error: function(object, error) {
+	    // The object was not retrieved successfully.
+	    // error is a Parse.Error with an error code and description.
+	  }
+	});
 }
