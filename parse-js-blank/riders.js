@@ -41,6 +41,11 @@ $(document).on("click", '.unBookRide', function() {
 	unBookRide(id);
 });
 
+$(document).on("click", '.displayReviews', function() {
+	$("#reviews").slideToggle("slow");
+});
+
+
 var weekday = new Array(7);
 weekday[0]=  "Sunday";
 weekday[1] = "Monday";
@@ -182,8 +187,11 @@ function displayRides(ridesArr) {
 			button = "<label><b>NO MORE AVAILABLE SEATS</b></label>"
 		}
 	
+
+		var reviewsDiv = "<div><button class='displayReviews'>Display Reviews</button><div id='reviews' hidden><ul style='text-align: left; list-style-type: none; margin: 0; padding: 0;'><li>Awesome</li><li>Best</li></div></div>";
+
 		//Left div
-		var divLeft = "<div class='rideLeft' style='text-align: center; width: 33%; height: 100%; float: left'>" + driverProfPicNode + driverNameNode + driverRatingNode + "</div>";
+		var divLeft = "<div class='rideLeft' style='text-align: center; width: 33%; height: 100%; float: left'>" + driverProfPicNode + driverNameNode + driverRatingNode + reviewsDiv + "</div>";
 
 		//Right Div
 		var divRight = "<div class='rideCenter' style='width: 66%; height: 100%; float: right'>" + dateNode + destinationNode + priceNode + seatsNode + pickupNode + riderNamesNode + button + "</div>";
@@ -192,9 +200,11 @@ function displayRides(ridesArr) {
 		// var div = "<div class='ride' id='" + ride.id + "' style='border-style: solid; border-color: " + (booked ? "green" : "black") + "'>" + driverProfPicNode + driverName + driverProfileBtn + driverRatingNode + dateNode + destinationNode + priceNode + seatsNode + pickupNode + riderNamesNode + button + "</div><br><br>";
 			
 		//Outer Div
-		var div = "<div class='ride' id='" + ride.id + "' style='height: 280px; border-style: solid; background-color: " + (booked ? "#CCFFCC;" : "#FFFFCC;") + "border-color: " + (booked ? "green" : "red") + "'>" + divLeft + divRight + "</div><br><br>";
+		var div = "<div class='ride' id='" + ride.id + "' style='overflow:hidden; border-style: solid; background-color: " + (booked ? "#CCFFCC;" : "#FFFFCC;") + "border-color: " + (booked ? "green" : "red") + "'>" + divLeft + divRight + "</div><br><br>";
 
 		$("#existingRides").append(div);
+
+		$("#reviews").hide();
 	}	
 }
 
