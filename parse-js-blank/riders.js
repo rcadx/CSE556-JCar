@@ -42,7 +42,9 @@ $(document).on("click", '.unBookRide', function() {
 });
 
 $(document).on("click", '.displayReviews', function() {
-	$("#reviews").slideToggle("slow");
+	var num = $(this).attr("id");
+	var reviewsID = "#reviews" + num;
+	$(reviewsID).slideToggle("slow");
 });
 
 $(document).on("click", '.map', function() {
@@ -192,7 +194,7 @@ function displayRides(ridesArr) {
 		}
 	
 
-		var reviewsDiv = "<div><button class='displayReviews'>Display Reviews</button><div id='reviews' hidden><ul style='text-align: left; list-style-type: none; margin: 0; padding: 0;'><li>Awesome</li><li>Best</li></div></div>";
+		var reviewsDiv = "<div><button class='displayReviews' id=" + i + ">Display Reviews</button><div id='reviews" + i + "' hidden><ul style='text-align: left; list-style-type: none; margin: 0; padding: 0;'><li>Awesome</li><li>Best</li></div></div>";
 
 		//Left div
 		var divLeft = "<div class='rideLeft' style='text-align: center; width: 33%; height: 100%; float: left'>" + driverProfPicNode + driverNameNode + driverRatingNode + reviewsDiv + "</div>";
