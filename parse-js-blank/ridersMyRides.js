@@ -115,7 +115,7 @@ function displayPendingRideRequests() {
 		var button = "<button class='cancelRideRequest' id='" + ride.id + "'>CANCEL RIDE</button>";
 
 		//Outer Div
-		var div = "<div class=ride>" + dateNode + destinationNode + priceNode + pickupNode + button + "</div><br><br>";
+		var div = "<div class=ride style='border-style: solid; border-color: black'>" + dateNode + destinationNode + priceNode + pickupNode + button + "</div><br><br>";
 			
 		$("#pendingRideRequestsList").append(div);
 	}
@@ -171,9 +171,8 @@ for (var i = 0; i < bookedRidesArr.length; i++) {
 		var driverPhone = driver.get("phone");
 		var driverPhoneNode = "<p id='phone'><b>Driver's Phone Number:</b> " + driverPhone + "</p>"
 
-
 		//Outer Div
-		var div = "<div class=ride>" + driverProfPicNode + driverNameNode + driverRatingNode + driverPhoneNode + dateNode + destinationNode + priceNode + pickupNode + button + "</div><br><br>";
+		var div = "<div class=ride style='border-style: solid; border-color: black'>" + driverProfPicNode + driverNameNode + driverRatingNode + driverPhoneNode + dateNode + destinationNode + priceNode + pickupNode + button + "</div><br><br>";
 			
 		$("#acceptedRideRequestsList").append(div);
 	}
