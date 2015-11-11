@@ -127,7 +127,7 @@ function displayRides(ridesArr) {
 		var rider = ride.get("createdBy");
 		var riderFBID = rider.get("fbID");
 		var riderProfPicURL = "https://graph.facebook.com/" + riderFBID + "/picture?type=large";
-		var riderProfPicNode = "<img src=" + riderProfPicURL + "><br>";
+		var riderProfPicNode = "<img src='" + riderProfPicURL + "' width='300' height='250'><br>";
 
 		//Name of Driver
 		var riderName = rider.get("firstName") + " " + rider.get("lastName");

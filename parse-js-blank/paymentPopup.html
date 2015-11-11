@@ -6,19 +6,24 @@
   	<script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" type="text/css" href="login.css">
 </head>
 <body>
 	<script type="text/javascript" src="initialize.js"></script>
 	<div id="main">
-		<div>
+		<div style="text-align:center">
 			<h1>Thank you for using JCar!</h1>
 			<div>
-				<h2>Click here to confirm payment for driver, Javale McGee</h2>
-				<button id="payBtn">Pay Now</button>
+				<p>We hope your last ride was pleasant.</p>
+				<p>Click here to confirm payment for driver, Javale McGee.</p>
+				<p>The price owed is 3 dollars</p>
+				<button id="payBtn">Confirm Payment</button>
 			</div>
 		</div>
 	</div>
-	<script type ="text/javascript" src="login.js"></script>
+	<script type ="text/javascript">
+		$("#payBtn").on("click", function() {
+			window.location.replace("ratingPopup.html");
+		});
+	</script>
 </body>
 </html>
