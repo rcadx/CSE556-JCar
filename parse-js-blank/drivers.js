@@ -109,7 +109,7 @@ function displayRides(ridesArr) {
 
 		//Destination
 		var destination = ride.get("destination");
-		var destinationNode = "<p id='destination'><b>Destination:</b> " + destination + "</p>";
+		var destinationNode = "<h2 id='destination' style='width:200px; margin-left:auto; margin-right:auto'><b>" + destination + "</b></h2>";
 
 		//Price
 		var price = ride.get("price");
@@ -150,7 +150,7 @@ function displayRides(ridesArr) {
 		var divLeft = "<div class='rideLeft' style='text-align: center; width: 33%; height: 100%; float: left'>" + riderProfPicNode + riderNameNode + "</div>";
 
 		//Right Div
-		var divRight = "<div class='rideCenter' style='width: 66%; height: 100%; float: right'>" + dateNode + destinationNode + priceNode + pickupNode + numSeatsNode + button + "</div>";
+		var divRight = "<div class='rideCenter' style='width: 66%; height: 100%; float: right'>" + destinationNode + dateNode + priceNode + pickupNode + numSeatsNode + button + "</div>";
 		
 
 		//Outer Div
