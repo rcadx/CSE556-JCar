@@ -158,7 +158,7 @@ function displayRides(ridesArr) {
 			
 
 		//Outer Div
-		var div = "<div class='ride' id='" + ride.id + "' style='padding: 10px; height: 280px; border-style: solid; background-color: #FFFFCC; border-color: " + (booked ? "green" : "red") + "'>" + divLeft + divRight + "</div><br><br>";
+		var div = "<div class='ride' id='" + ride.id + "' style='padding: 10px; height: 280px; border-style: solid; background-color:" + (booked ? "#CCFFCC;" : "#FFFFCC;") + "border-color: " + (booked ? "green" : "red") + "'>" + divLeft + divRight + "</div><br><br>";
 	
 		$("#rideRequests").append(div);
 	}		

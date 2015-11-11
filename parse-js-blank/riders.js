@@ -192,7 +192,7 @@ function displayRides(ridesArr) {
 		// var div = "<div class='ride' id='" + ride.id + "' style='border-style: solid; border-color: " + (booked ? "green" : "black") + "'>" + driverProfPicNode + driverName + driverProfileBtn + driverRatingNode + dateNode + destinationNode + priceNode + seatsNode + pickupNode + riderNamesNode + button + "</div><br><br>";
 			
 		//Outer Div
-		var div = "<div class='ride' id='" + ride.id + "' style='height: 280px; border-style: solid; background-color: #FFFFCC; border-color: " + (booked ? "green" : "red") + "'>" + divLeft + divRight + "</div><br><br>";
+		var div = "<div class='ride' id='" + ride.id + "' style='height: 280px; border-style: solid; background-color: " + (booked ? "#CCFFCC;" : "#FFFFCC;") + "border-color: " + (booked ? "green" : "red") + "'>" + divLeft + divRight + "</div><br><br>";
 
 		$("#existingRides").append(div);
 	}	
@@ -308,3 +308,4 @@ function unBookRide(id) {
 	clearRidesList();
 	displayRides(ridesArray);
 }
+
