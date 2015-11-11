@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<head>
+	<title>JCar</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="//www.parsecdn.com/js/parse-1.6.7.min.js"></script>
+  	<script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+	<script type="text/javascript" src="initialize.js"></script>
+	<div id="main">
+		<div style="text-align: center">
+			<h1>How was your driver?</h1>
+			<div id="driverInfoDiv">
+				
+			</div>
+			<ul style="list-style-type: none; margin: 0; padding: 0;">
+				<div id="5" style="width: 210px; margin: auto; border-style: none; border-color: green"><img src="5stars.png" width="200" height="50" id="5star"></div>
+				<div id="4" style="width: 210px; margin: auto; border-style: none; border-color: green"><img src="4stars.png" width="200" height="50" id="4star"></div>
+				<div id="3" style="width: 210px; margin: auto; border-style: none; border-color: green"><img src="3stars.png" width="200" height="50" id="3star"></div>
+				<div id="2" style="width: 210px; margin: auto; border-style: none; border-color: green"><img src="2stars.png" width="200" height="50" id="2star"></div>
+				<div id="1" style="width: 210px; margin: auto; border-style: none; border-color: green"><img src="1star.png" width="200" height="50" id="1star"></div>
+			</ul>
+
+			<h3>Review</h3>
+			<textarea rows="5" cols="80" id="review"></textarea><br>
+			<button id="submitBtn">Submit</button>
+		</div>
+	</div>
+	<script type ="text/javascript">
+		Parse.initialize("eamcKJmUTepWXqQzYx5iNmgVUcX55xvCQX749IfY", "Gg3ZOGnMTkHaMIOZ0OJHsig6QwU5j8Jev2RkIZML");
+
+		var driver;
+		var rating;
+
+		$("#submitBtn").on("click", function() {
+			var user = Parse.User.current();
+		    var isDriver = user.get("driver");
+
+		    var review = $("#review").val();
+		   
+		    if (isDriver) {
+		        window.location.replace("drivers.html");
+		    } else {
+		      	window.location.replace("riders.html");
+		    }
+		});
+
+		$(document).on("click", "#5star", function() {
+			$("#5").css("border-style", "solid");
+			$("#4").css("border-style", "none");
+			$("#3").css("border-style", "none");
+			$("#2").css("border-style", "none");
+			$("#1").css("border-style", "none");
+			rating = 5;
+		});
+
+		$(document).on("click", "#4star", function() {
+			$("#5").css("border-style", "none");
+			$("#4").css("border-style", "solid");
+			$("#3").css("border-style", "none");
+			$("#2").css("border-style", "none");
+			$("#1").css("border-style", "none");
+			rating = 4;
+		});
+
+		$(document).on("click", "#3star", function() {
+			$("#5").css("border-style", "none");
+			$("#4").css("border-style", "none");
+			$("#3").css("border-style", "solid");
+			$("#2").css("border-style", "none");
+			$("#1").css("border-style", "none");
+			rating = 3;
+		});
+
+		$(document).on("click", "#2star", function() {
+			$("#5").css("border-style", "none");
+			$("#4").css("border-style", "none");
+			$("#3").css("border-style", "none");
+			$("#2").css("border-style", "solid");
+			$("#1").css("border-style", "none");
+			rating = 2;
+		});
+
+		$(document).on("click", "#1star", function() {
+			$("#5").css("border-style", "none");
+			$("#4").css("border-style", "none");
+			$("#3").css("border-style", "none");
+			$("#2").css("border-style", "none");
+			$("#1").css("border-style", "solid");
+			rating = 1;
+		});
+	</script>
+</body>
+</html>

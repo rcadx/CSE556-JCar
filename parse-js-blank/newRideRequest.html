@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<head>
+	<title>JCar</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="//www.parsecdn.com/js/parse-1.6.7.min.js"></script>
+  	<script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<link href="http://code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+				<link rel="stylesheet" type="text/css" href="css/newriders.css">
+
+</head>
+<body>
+	<div id="main">
+		<div id="loginFormDiv">
+			<h1>Request a Ride</h1>
+			Destination: <input type="text" id="destination"><br>
+			Date: <input type="text" id="date"><br> <!-- Flexible? +/- <input type="number" id="flexibleDays"> days<br> -->
+			Time Range Available - Start Time: <input type="time" id="startTime"> End Time: <input type="time" id="endTime"><br>
+			<!-- Desired Duration*: <input type="number" id="duration"> hours<br> -->
+			Preferred Pickup Location: 
+			<select id="pickupLoc">
+  				<option value="Clocktower">Clocktower</option>
+  				<option value="Village/Snow Way">Village/Snow Way</option>
+  				<option value="Brookings">Brookings</option>
+  				<option value="Lofts">Lofts</option>
+  				<option value="DUC/Mallinkrodt Parking Lot">DUC/Mallinkrodt Parking lot</option>
+			</select><br>
+			Max Price Willing to Pay: $<input type="number" id="price"><br>
+			Number of Seats Needed: <input type="number" id="numSeats"><br>
+			Additional Comments: <input type="text" id="comments"><br><br>
+			<div id="buttons">
+			<button id="requestRideBtn">Submit Ride Request</button>
+			<button id="cancelBtn">Cancel</button><br><br>
+		</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		Parse.initialize("eamcKJmUTepWXqQzYx5iNmgVUcX55xvCQX749IfY", "Gg3ZOGnMTkHaMIOZ0OJHsig6QwU5j8Jev2RkIZML");
+
+		$("#cancelBtn").on("click", function() {
+			window.location.replace("riders.html");
+		});
+
+		$("#date").datepicker();
+
+		$("#requestRideBtn").on("click", function() {
+				var pickupLoc = $("#pickupLoc").val();
+			  	var destination = $("#destination").val();
+				var d = $("#date").val();
+				// var flexibleDays = $("#flexibleDays").val();
+				// var time = $("#time").val().toLocaleString();
+				var start = $("#startTime").val().toLocaleString();
+				var end = $("#endTime").val().toLocaleString();
+				// var dateTime = new Date(date + " " + time);
+				var date = new Date(d);
+				var startTime = new Date(d + " " + start);
+				var endTime = new Date(d + " " + end);
+				var price = Number($("#price").val());
+				var numSeats = Number($("#numSeats").val());
+				var comments = $("#comments").val();
+				if (!pickupLoc || !destination || !date || !price) {
+					alert("Fill out all fields please");
+					return;
+				}
+
+			  	var now = new Date();
+			  	if (date <= now) {
+			    	alert("Time travel doesn't exist!");
+			    	return;
+			  	}
+
+				var RideRequests = Parse.Object.extend("RideRequests");
+				var rides = new RideRequests();
+			  	rides.set("pickupLoc", pickupLoc);
+			  	rides.set("destination", destination);
+			  	rides.set("date", date);
+			  	rides.set("startTime", startTime);
+			  	rides.set("endTime", endTime);
+			  	// rides.set("numSeats", numSeats);
+			  	rides.set("price", price);
+			  	rides.set("createdBy", Parse.User.current());
+			  	rides.set("comments", comments);
+			  	rides.set("numSeats", numSeats);
+			  	// rides.set("riders", []);
+			  	var first = Parse.User.current().get("firstName");
+			  	var last = Parse.User.current().get("lastName");
+			  	var riderName = first + " " + last;
+			  	rides.set("riderName", riderName);
+
+			  	rides.save(null, {
+					success: function(gameScore) {
+			  
+			 		alert("Ride created successfully.");
+			 		window.location.replace("riders.html");
+				},
+				error: function(gameScore, error) {
+			  		alert('Failed to create new object, with error code: ' + error.message);
+				}
+				});
+		});
+	</script>
+</body>
+</html>

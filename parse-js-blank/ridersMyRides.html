@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+	<title>JCar</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="//www.parsecdn.com/js/parse-1.6.7.min.js"></script>
+  	<script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body>
+		<script type="text/javascript" src="initialize.js"></script>
+	<div id="main">
+		<ul id="toolBar" style="list-style-type: none; margin: 0; padding: 0;">
+				<li style="float: right"><button id="logoutBtn">Logout</button></li>
+				<li style="float: left"><button id="backToHome">Back to Home</button></li>
+		</ul><br>
+		<div id="myRideRequestsDiv" style="text-align:center">
+			<h1>My Rides</h1>
+			<div id="bookedRidesList" style="width: 31%; height: 100%; margin-right: 15px; margin-left: 5px; float: left;">
+				<h3>Booked Rides</h3>
+				<!-- to be filled dynamically in js file -->
+			</div>
+			<div id="acceptedRideRequestsList" style="width: 31%; height: 100%; padding: 5px; margin-right: 5px; margin-left: 5px; float: left;">
+				<h3>Accepted Ride Requests</h3>
+				<!-- to be filled dynamically in js file -->
+			</div>
+			<div id="pendingRideRequestsList" style="width: 31%; margin-right: 5px; margin-left: 5px; height: 100%; float: left;">
+				<h3>Pending Ride Requests</h3>
+				<!-- to be filled dynamically in js file -->
+			</div>
+		</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="logout.js"></script>
+	<script type="text/javascript" src="ridersMyRides.js"></script>
+</body>
+</html>
