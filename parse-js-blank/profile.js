@@ -30,6 +30,8 @@ $(document).ready(function() {
 			stars += "<img src='Star.png'>"
 		}
 		driverRatingNode = driverRating ? ("<p id=rating><b>Driver Rating:</b> " + stars + "</p>") : "<p>Driver Rating: This driver has no ratings yet.</p>"
+	} else {
+		$("#reviews").hide();
 	}
 
 	var div = "<div class='profileInfo'>" + profPicNode + userNameNode + driverRatingNode + "</div><br><br>";
