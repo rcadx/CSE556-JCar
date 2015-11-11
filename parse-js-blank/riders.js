@@ -182,9 +182,9 @@ function displayRides(ridesArr) {
 
 		var button = "";
 		if (booked) {
-			button = "<button class='unBookRide' id='" + ride.id + "'>UNBOOK RIDE</button><br><button class='map'>Go to Map</button>"
+			button = "<button class='unBookRide' id='" + ride.id + "'>UNBOOK RIDE</button><br><button class='map'>GO TO MAP</button>"
 		} else {
-			button = "<button class='bookRide' id='" + ride.id + "'>BOOK RIDE</button><br><button class='map'>Go to Map</button>";
+			button = "<button class='bookRide' id='" + ride.id + "'>BOOK RIDE</button><br><button class='map'>GO TO MAP</button>";
 		}
 
 		if (seats <= 0) {
