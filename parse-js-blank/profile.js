@@ -32,7 +32,7 @@ $(document).ready(function() {
 		driverRatingNode = driverRating ? ("<p id=rating><b>Driver Rating:</b> " + stars + "</p>") : "<p>Driver Rating: This driver has no ratings yet.</p>"
 	}
 
-	var div = "<div class='profileInfo' style='border-style: solid; border-color: " + "black" + "'>" + profPicNode + userNameNode + driverRatingNode + "</div><br><br>";
+	var div = "<div class='profileInfo'>" + profPicNode + userNameNode + driverRatingNode + "</div><br><br>";
 		
 	$("#profileDiv").append(div);
 });

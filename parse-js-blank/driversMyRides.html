@@ -9,9 +9,14 @@
 <body>
 	<script type="text/javascript" src="initialize.js"></script>
 	<div id="main">
-			<h1>My Rides</h1>
-				<button id="backToHome">Back to Home</button>
-			<button id="logoutBtn">Logout</button><br><br>
+			<ul id="toolBar" style="list-style-type: none; margin: 0; padding: 0;">
+				<li style="float: right"><button id="logoutBtn">Logout</button></li>
+				<li style="float: left"><button id="backToHome">Back to Home</button></li>
+			</ul>
+			<div id="2nddiv">
+				<div style="text-align:center; width: 400px; display: block; margin-left: auto; margin-right: auto;">
+					<h1 style='width: 200px; margin-left:auto; margin-right:auto'>My Rides</h1>
+				</div>
 			<div id="acceptedRidesList" style="width: 45%; height: 100%; float: left;">
 				<h2>Ride Requests I Accepted</h2>
 
@@ -20,6 +25,8 @@
 				<h2>Rides I Submitted</h2>
 				
 			</div>
+			</div>
+			
 		</div>
 		</div>
 	</div>

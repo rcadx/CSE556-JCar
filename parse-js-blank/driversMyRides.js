@@ -108,7 +108,7 @@ function displayRides() { //accepted parameter is flag for whether to append rid
 		var button = "<button class='cancelRide' id='" + ride.id + "'>CANCEL RIDE</button>";
 
 		//Outer Div
-		var div = "<div class=ride>" + dateNode + destinationNode + priceNode + seatsNode + pickupNode + riderNamesNode + button + "</div><br><br>";
+		var div = "<div class='ride' style='border-style: solid; border-color: " + "black" + "'>" + dateNode + destinationNode + priceNode + seatsNode + pickupNode + riderNamesNode + button + "</div><br><br>";
 			
 		$("#myRidesList").append(div);
 	}		

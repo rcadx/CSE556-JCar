@@ -11,16 +11,21 @@
 <body>
 	<script type="text/javascript" src="initialize.js"></script>
 	<div id="main">
-		<h1>JCar</h1>
-		<div id="loginFormDiv" style="min-width: 500px; margin: 0px auto">
-			<button id="backToHome">Back to Home</button>
-			<button id="logoutBtn">Logout</button>
-			<button id="settings">Settings</button>
-			<div id="profileDiv" style="margin">
+		<div id="loginFormDiv" style="text-align: center; min-width: 500px; margin: 0px auto">
+			<ul id="toolBar" style="list-style-type: none; margin: 0; padding: 0;">
+				<li style="float: right"><button id="logoutBtn">Logout</button></li>
+				<li style="float: left"><button id="profileBtn">Profile</button></li>
+				<li style="float: left"><button id="settings">Settings</button></li>
+			</ul>
+			<div id="profileDiv" style="width: 400px; margin-left:auto; margin-right:auto">
 				<h2>Profile</h1>
 			</div><br>
 			<div id="reviews">
 				<h2>Reviews</h1>
+				<ul style="list-style-type: none; margin: 0; padding: 0;">
+					<li><div><i>BEST DRIVER EVER</i></div></li><br>
+					<li><div><i>Super funny</i></div></li>
+				</ul>
 			</div>
 		</div>
 		</div>
