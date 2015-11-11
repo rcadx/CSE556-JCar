@@ -45,6 +45,10 @@ $(document).on("click", '.displayReviews', function() {
 	$("#reviews").slideToggle("slow");
 });
 
+$(document).on("click", '.map', function() {
+	window.location.replace("map.html");
+});
+
 
 var weekday = new Array(7);
 weekday[0]=  "Sunday";
@@ -178,9 +182,9 @@ function displayRides(ridesArr) {
 
 		var button = "";
 		if (booked) {
-			button = "<button class='unBookRide' id='" + ride.id + "'>UNBOOK RIDE</button>"
+			button = "<button class='unBookRide' id='" + ride.id + "'>UNBOOK RIDE</button><br><button class='map'>Go to Map</button>"
 		} else {
-			button = "<button class='bookRide' id='" + ride.id + "'>BOOK RIDE</button>";
+			button = "<button class='bookRide' id='" + ride.id + "'>BOOK RIDE</button><br><button class='map'>Go to Map</button>";
 		}
 
 		if (seats <= 0) {
