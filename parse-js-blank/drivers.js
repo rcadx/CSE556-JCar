@@ -104,7 +104,7 @@ function displayRides(ridesArr) {
 		//Facebook Picture of Driver
 		var rider = ride.get("createdBy");
 		var riderFBID = rider.get("fbID");
-		var riderProfPicURL = "https://graph.facebook.com/" + riderFBID + "/picture?type=normal";
+		var riderProfPicURL = "https://graph.facebook.com/" + riderFBID + "/picture?type=large";
 		var riderProfPicNode = "<img src=" + riderProfPicURL + "><br>";
 
 		//Name of Driver
@@ -124,9 +124,20 @@ function displayRides(ridesArr) {
 			button = "<button class='unBookRide' id='" + ride.id + "'>I CAN NO LONGER DRIVE</button>";
 		}
 
+		//Left div
+		var divLeft = "<div class='rideLeft' style='text-align: center; width: 33%; height: 100%; float: left'>" + riderProfPicNode + riderNameNode + "</div>";
+
+		//Right Div
+		var divRight = "<div class='rideCenter' style='width: 66%; height: 100%; float: right'>" + dateNode + destinationNode + priceNode + pickupNode + numSeatsNode + button + "</div>";
+		
+
 		//Outer Div
-		var div = "<div class='ride' style='border-style: solid; border-color: " + (booked ? "green" : "black") + "'>" + riderProfPicNode + riderNameNode + dateNode + destinationNode + priceNode + pickupNode + numSeatsNode + button + "</div><br><br>";
+		// var div = "<div class='ride' style='border-style: solid; border-color: " + (booked ? "green" : "black") + "'>" + riderProfPicNode + riderNameNode + dateNode + destinationNode + priceNode + pickupNode + numSeatsNode + button + "</div><br><br>";
 			
+
+		//Outer Div
+		var div = "<div class='ride' id='" + ride.id + "' style='padding: 10px; height: 280px; border-style: solid; border-color: " + (booked ? "green" : "red") + "'>" + divLeft + divRight + "</div><br><br>";
+	
 		$("#rideRequests").append(div);
 	}		
 }

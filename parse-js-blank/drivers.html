@@ -13,13 +13,17 @@
 	<div id="main">
 
 		<div id="loginFormDiv">
-			<h1>Welcome</h1>
-			<button id="profileBtn">Profile</button>
-			<button id="logoutBtn">Logout</button>
-			<button id="settings">Settings</button>
-			<button id="createRideBtn">Create a New Ride</button>
-			<button id="myRidesBtn">My Rides</button>
+			<ul id="toolBar" style="list-style-type: none; margin: 0; padding: 0;">
+				<li style="float: right"><button id="logoutBtn">Logout</button></li>
+				<li style="float: left"><button id="profileBtn">Profile</button></li>
+				<li style="float: left"><button id="settings">Settings</button></li>
+			</ul>
 			<div id="mainPanels">
+				<div style="text-align:center; width: 400px; display: block; margin-left: auto; margin-right: auto;">
+					<h1 style='width: 200px; margin-left:auto; margin-right:auto'>Home</h1>
+					<button id="createRideBtn">Create a New Ride</button>
+					<button id="myRidesBtn">My Rides</button>
+				</div>
 				<div id="filters" style="width: 25%; height: 100%; float: left;">
 					<h3>Filter By</h3>
 					Destination: <br>
@@ -41,9 +45,9 @@
 					<input type="number" id="price"><br><br>
 					<button id="clearBtn">Clear Filter</button>
 				</div>
-				<div id="rideRequestsDiv" style="width: 75%; height: 100%; float: right;">
-					<h3>Ride Requests</h3>
-					<div id="rideRequests">
+				<div id="rideRequestsDiv" style="width: 75%; height: 480px; float: right">
+					<h3 style="width:200px; margin-left:auto; margin-right:auto">Ride Requests</h3>
+					<div id="rideRequests" style="height: 100%; overflow: scroll">
 						<!-- Filled dynamically in drivers.js -->
 					</div>
 				</div>

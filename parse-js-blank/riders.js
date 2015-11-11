@@ -112,11 +112,11 @@ function displayRides(ridesArr) {
 		for (var j = 0; j < driverRating; j++) {
 			stars += "<img src='Star.png'>"
 		}
-		var driverRatingNode = driverRating ? ("<p id=rating><b>Driver Rating:</b> " + stars + "</p>") : "<p>Driver Rating: This driver has no ratings yet.</p>"
+		var driverRatingNode = driverRating ? ("<p id=rating><b>Driver Rating:</b> " + stars + "</p>") : "<p><b>Driver Rating:</b> This driver has no ratings yet.</p>"
 
 		//Facebook Picture of Driver
 		var driverFBID = driver.get("fbID");
-		var driverProfPicURL = "https://graph.facebook.com/" + driverFBID + "/picture?type=normal";
+		var driverProfPicURL = "https://graph.facebook.com/" + driverFBID + "/picture?type=large";
 		var driverProfPicNode = "<img src=" + driverProfPicURL + "><br>";
 
 		//Name of Driver
@@ -126,6 +126,9 @@ function displayRides(ridesArr) {
 		//See if the ride has been booked already by you
 		var riders = ride.get("riders");
 		var riderNamesNode = "<p id='ridersNames'><b>Other Riders:</b>";
+
+		var driverId = driver.get("objectId");
+		var driverProfileBtn = "<form action='otherProfile.html'><input type='text' name='id' value='" + driverId + "' hidden><input type='submit' value='Go To Profile'></form>";
 
 		var booked = false;
 		for (var j = 0; j < riders.length; j++) {
@@ -156,9 +159,18 @@ function displayRides(ridesArr) {
 			button = "<label><b>NO MORE AVAILABLE SEATS</b></label>"
 		}
 	
+		//Left div
+		var divLeft = "<div class='rideLeft' style='text-align: center; width: 33%; height: 100%; float: left'>" + driverProfPicNode + driverNameNode + driverProfileBtn + driverRatingNode + "</div>";
+
+		//Right Div
+		var divRight = "<div class='rideCenter' style='width: 66%; height: 100%; float: right'>" + dateNode + destinationNode + priceNode + seatsNode + pickupNode + riderNamesNode + button + "</div>";
+		
 		//Outer Div
-		var div = "<div class='ride' id='" + ride.id + "' style='border-style: solid; border-color: " + (booked ? "green" : "black") + "'>" + driverProfPicNode + driverName + dateNode + destinationNode + priceNode + seatsNode + pickupNode + riderNamesNode + driverRatingNode + button + "</div><br><br>";
+		// var div = "<div class='ride' id='" + ride.id + "' style='border-style: solid; border-color: " + (booked ? "green" : "black") + "'>" + driverProfPicNode + driverName + driverProfileBtn + driverRatingNode + dateNode + destinationNode + priceNode + seatsNode + pickupNode + riderNamesNode + button + "</div><br><br>";
 			
+		//Outer Div
+		var div = "<div class='ride' id='" + ride.id + "' style='height: 280px; border-style: solid; border-color: " + (booked ? "green" : "red") + "'>" + divLeft + divRight + "</div><br><br>";
+
 		$("#existingRides").append(div);
 	}	
 }

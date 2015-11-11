@@ -12,13 +12,17 @@
 	<script type="text/javascript" src="initialize.js"></script>
 	<div id="main">
 		<div id="loginFormDiv">
-			<h1>Welcome</h1>
-			<button id="profileBtn">Profile</button>
-			<button id="logoutBtn">Logout</button>
-			<button id="settings">Settings</button>
-			<button id="newRideRequestBtn">New Ride Request</button>
-			<button id="myRidesBtn">My Rides</button>
+			<ul id="toolBar" style="list-style-type: none; margin: 0; padding: 0;">
+				<li style="float: right"><button id="logoutBtn">Logout</button></li>
+				<li style="float: left"><button id="profileBtn">Profile</button></li>
+				<li style="float: left"><button id="settings">Settings</button></li>
+			</ul>
 			<div id="mainPanels">
+				<div style="text-align:center; width: 400px; display: block; margin-left: auto; margin-right: auto;">
+					<h1 style='width: 200px; margin-left:auto; margin-right:auto'>Home</h1>
+					<button id="newRideRequestBtn">New Ride Request</button>
+					<button id="myRidesBtn">My Rides</button>
+				</div>
 				<div class="overlay-content" id="filters" style="width: 25%; height: 100%; float: left;">
 					<h3>Filter By</h3>
 					Destination: <br>
@@ -45,11 +49,11 @@
 					<input type="radio" name="rating" value="2">2 Stars<br>
 					<input type="radio" name="rating" value="1">1 Star<br><br>
 					Seats Needed: <br>
-					<input type="number" id="numSeats"><br>
+					<input type="number" id="numSeats"><br><br>
 					<button id="clearBtn">Clear Filter</button>
 				</div>
-				<div class="overlay-content" id="existingRidesDiv" style="width: 75%; height: 450px; float: right">
-					<h2>Available Rides</h2>
+				<div class="overlay-content" id="existingRidesDiv" style="width: 75%; height: 470px; float: right">
+					<h2 style="width:200px; margin-left:auto; margin-right:auto">Available Rides</h2>
 					<div id="existingRides" style="height: 100%; overflow: scroll">
 						<!-- Filled dynamically in riders.js -->
 					</div>
