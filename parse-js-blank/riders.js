@@ -253,10 +253,6 @@ function filterList() {
 			continue;
 		}
 
-		if (!driverRating) {
-			continue;
-		}
-
 		var rideNumSeats = ride.get("numSeats");
 		if (numSeats && (rideNumSeats < numSeats)) {
 			continue;
