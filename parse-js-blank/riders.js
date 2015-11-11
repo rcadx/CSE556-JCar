@@ -127,9 +127,6 @@ function displayRides(ridesArr) {
 		var riders = ride.get("riders");
 		var riderNamesNode = "<p id='ridersNames'><b>Other Riders:</b>";
 
-		var driverId = driver.get("objectId");
-		var driverProfileBtn = "<form action='otherProfile.html'><input type='text' name='id' value='" + driverId + "' hidden><input type='submit' value='Go To Profile'></form>";
-
 		var booked = false;
 		for (var j = 0; j < riders.length; j++) {
 			var user = Parse.User.current();
@@ -147,6 +144,9 @@ function displayRides(ridesArr) {
 			
 		}
 		riderNamesNode += "</p>"
+
+		var driverId = driver.get("objectId");
+		var driverProfileBtn = "<form action='otherProfile.html'><input type='text' name='id' value='" + driverId + "' hidden><input type='submit' value='Go To Profile'></form>";
 
 		var button = "";
 		if (booked) {
@@ -169,7 +169,7 @@ function displayRides(ridesArr) {
 		// var div = "<div class='ride' id='" + ride.id + "' style='border-style: solid; border-color: " + (booked ? "green" : "black") + "'>" + driverProfPicNode + driverName + driverProfileBtn + driverRatingNode + dateNode + destinationNode + priceNode + seatsNode + pickupNode + riderNamesNode + button + "</div><br><br>";
 			
 		//Outer Div
-		var div = "<div class='ride' id='" + ride.id + "' style='height: 280px; border-style: solid; border-color: " + (booked ? "green" : "red") + "'>" + divLeft + divRight + "</div><br><br>";
+		var div = "<div class='ride' id='" + ride.id + "' style='height: 280px; border-style: solid; background-color: #FFFFCC; border-color: " + (booked ? "green" : "red") + "'>" + divLeft + divRight + "</div><br><br>";
 
 		$("#existingRides").append(div);
 	}	
@@ -257,6 +257,14 @@ function bookRide(id) {
 	}
 	ride.increment("numSeats", -1);
 	ride.save();
+
+	var TempRides = Parse.Object.extend("TempRides");
+	var tempRide = new TempRides();
+	var driver = ride.get("createdBy");
+	tempRide.set("ride", ride);
+	tempRide.set("driver", driver);
+	tempRide.set("rider", Parse.User.current());
+	tempRide.save();
 
 	alert("You have booked this ride!");
 

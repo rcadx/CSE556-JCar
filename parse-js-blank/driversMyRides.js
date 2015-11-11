@@ -72,29 +72,43 @@ function displayRides() { //accepted parameter is flag for whether to append rid
 		var date = new Date(ride.get("date"));
 		var time = date.toLocaleTimeString();
 		var day = weekday[date.getDay()];
-		var dateNode = "<p id=date>Date: " + day + ", " + (date.getMonth() + 1) + "/" + (date.getDate()) + "/" + (date.getFullYear()) + " at " + time + "</p>";
+		var dateNode = "<p id=date><b>Date:</b> " + day + ", " + (date.getMonth() + 1) + "/" + (date.getDate()) + "/" + (date.getFullYear()) + " at " + time + "</p>";
 
 		//Destination
 		var destination = ride.get("destination");
-		var destinationNode = "<p id=destination>Destination: " + destination + "</p>";
+		var destinationNode = "<p id=destination><b>Destination:</b> " + destination + "</p>";
 
 		//Price
 		var price = ride.get("price");
-		var priceNode = "<p id=price>Price: " + price + "</p>";
+		var priceNode = "<p id=price><b>Price:</b> " + price + "</p>";
 
 		//Available seats
 		var seats = ride.get("numSeats");
-		var seatsNode = "<p id=price>Seats Available: " + seats + "</p>";
+		var seatsNode = "<p id=price><b>Seats Available:</b> " + seats + "</p>";
 
 		//Pickup Location
 		var pickupLoc = ride.get("pickupLoc");
-		var pickupNode = "<p id=price>Pickup Location: " + pickupLoc + "</p>";
+		var pickupNode = "<p id=price><b>Pickup Location:</b> " + pickupLoc + "</p>";
+
+		//Riders
+		var riders = ride.get("riders");
+		var riderNamesNode = "<p id='ridersNames'><b>Other Riders:</b>";
+		for (var j = 0; j < riders.length; j++) {
+			var rider = riders[j];
+			riderNamesNode += " " + rider.get("firstName") + " " + rider.get("lastName");
+			if (j < riders.length - 1) {
+				riderNamesNode += ", ";
+			} else {
+				riderNamesNode += " ";
+			}	
+		}
+		riderNamesNode += "</p>"
 
 		//cancel button
 		var button = "<button class='cancelRide' id='" + ride.id + "'>CANCEL RIDE</button>";
 
 		//Outer Div
-		var div = "<div class=ride>" + dateNode + destinationNode + priceNode + seatsNode + pickupNode + button + "</div><br><br>";
+		var div = "<div class=ride>" + dateNode + destinationNode + priceNode + seatsNode + pickupNode + riderNamesNode + button + "</div><br><br>";
 			
 		$("#myRidesList").append(div);
 	}		

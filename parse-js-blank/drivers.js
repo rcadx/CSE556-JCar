@@ -70,6 +70,28 @@ $(document).ready(function() {
 		}
 	});
 
+	var TempRides = Parse.Object.extend("TempRides");
+	var query2 = new Parse.Query(TempRides);
+	query2.include("rider");
+	query2.include("ride");
+	query2.equalTo("driver", Parse.User.current());
+	query2.find({
+		success: function(rides) {
+			for (var i = 0; i < rides.length; i++) {
+				var tempRide = rides[i];
+				var ride = tempRide.get("ride");
+				var rider = tempRide.get("rider");
+				var alertString = "Rider " + rider.get("firstName") + " " + rider.get("lastName") + " has joined your ride to " + ride.get("destination") + ". Go to your \"My Rides\" page to see this update.";
+				alert(alertString);
+				//Destroy in database so this popup doesn't occur in future loads of this screen
+				tempRide.destroy({});
+			}
+		},
+		error: function(error) {
+			console.log("No rides found");
+		}
+	});
+
 });
 
 function displayRides(ridesArr) {
@@ -136,7 +158,7 @@ function displayRides(ridesArr) {
 			
 
 		//Outer Div
-		var div = "<div class='ride' id='" + ride.id + "' style='padding: 10px; height: 280px; border-style: solid; border-color: " + (booked ? "green" : "red") + "'>" + divLeft + divRight + "</div><br><br>";
+		var div = "<div class='ride' id='" + ride.id + "' style='padding: 10px; height: 280px; border-style: solid; background-color: #FFFFCC; border-color: " + (booked ? "green" : "red") + "'>" + divLeft + divRight + "</div><br><br>";
 	
 		$("#rideRequests").append(div);
 	}		
