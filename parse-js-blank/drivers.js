@@ -232,6 +232,14 @@ function bookRide(id) {
 	ride.set("driver", Parse.User.current());
 	ride.save();
 
+	var TempRideRequests = Parse.Object.extend("TempRideRequests");
+	var tempRideRequest = new TempRideRequests();
+	var rider = ride.get("createdBy");
+	tempRideRequest.set("ride", ride);
+	tempRideRequest.set("driver", Parse.User.current());
+	tempRideRequest.set("rider", rider);
+	tempRideRequest.save();
+
 	alert("You have successfully said you can drive this ride request!");
 
 	clearRidesList();

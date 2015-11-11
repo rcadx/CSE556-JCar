@@ -73,6 +73,29 @@ $(document).ready(function() {
 		}
 	});
 
+	var TempRides = Parse.Object.extend("TempRideRequests");
+	var query2 = new Parse.Query(TempRides);
+	query2.include("driver");
+	query2.include("ride");
+	query2.equalTo("rider", Parse.User.current());
+	query2.find({
+		success: function(rides) {
+			for (var i = 0; i < rides.length; i++) {
+				var tempRide = rides[i];
+				var ride = tempRide.get("ride");
+				var driver = tempRide.get("driver");
+				var alertString = "Driver " + driver.get("firstName") + " " + driver.get("lastName") + " has agreed to drive you to " + ride.get("destination") + ". Go to your \"My Rides\" page to see this update.";
+				alert(alertString);
+				//Destroy in database so this popup doesn't occur in future loads of this screen
+				tempRide.destroy({});
+			}
+		},
+		error: function(error) {
+			console.log("No rides found");
+		}
+	});
+
+
 });
 
 function clearRidesList() {
@@ -121,7 +144,7 @@ function displayRides(ridesArr) {
 
 		//Name of Driver
 		var driverName = driver.get("firstName") + " " + driver.get("lastName");
-		var driverNameNode = "<p id='name'><b>Driver's Name:</b> " + driverName + "</p><br>"
+		var driverNameNode = "<p id='name'><b>Driver's Name:</b> " + driverName + "</p>"
 
 		//See if the ride has been booked already by you
 		var riders = ride.get("riders");
@@ -146,7 +169,7 @@ function displayRides(ridesArr) {
 		riderNamesNode += "</p>"
 
 		var driverId = driver.get("objectId");
-		var driverProfileBtn = "<form action='otherProfile.html'><input type='text' name='id' value='" + driverId + "' hidden><input type='submit' value='Go To Profile'></form>";
+		var driverProfileBtn = "<form action='otherProfile.html'><input type='submit' value='Go To Profile'><input type='text' name='id' value='" + driverId + "' hidden></form>";
 
 		var button = "";
 		if (booked) {
@@ -160,7 +183,7 @@ function displayRides(ridesArr) {
 		}
 	
 		//Left div
-		var divLeft = "<div class='rideLeft' style='text-align: center; width: 33%; height: 100%; float: left'>" + driverProfPicNode + driverNameNode + driverProfileBtn + driverRatingNode + "</div>";
+		var divLeft = "<div class='rideLeft' style='text-align: center; width: 33%; height: 100%; float: left'>" + driverProfPicNode + driverNameNode + driverRatingNode + "</div>";
 
 		//Right Div
 		var divRight = "<div class='rideCenter' style='width: 66%; height: 100%; float: right'>" + dateNode + destinationNode + priceNode + seatsNode + pickupNode + riderNamesNode + button + "</div>";
